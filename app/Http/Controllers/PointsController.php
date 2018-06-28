@@ -35,14 +35,14 @@ class PointsController extends Controller
 		//redeemed_shop
 		$redeemcst = DB::table('shop_redeemed')->where('customerinfo_id', $customers->id)->first();
 		$dec = ceil($amount/100);
-		$pointamt = DB::table('point_rule')->select('point')->first();
+		//$pointamt = DB::table('point_rule')->select('point')->first();
+		$pointamt = $points->point;
 		$cst_point = 100;
-
 		//merchant
 		$merchant = DB::table('merchant_shop')->where('merchant_id', $points->merchant_id)->first();
 		if($amount > $points->min_amount && $customers->mobile_number == $mobile_number && $name == $points->name)
 		{
-			$pointamt = $dec + $pointamt->point;
+			$pointamt = $dec + $points->point;
 			$cst_point = $cst_point + $pointamt; //customers always start with 100 point by default via registration;
 			// DB::table('point_rule')
 			// 	->where('name', $name)
@@ -64,7 +64,7 @@ class PointsController extends Controller
 		}
 
 		$redeemcst = DB::table('shop_redeemed')->where('customerinfo_id', $customers->id)->first();
-		return view('calculate', compact('redeemcst'));
+		return view('calculate', compact('redeemcst', 'customers'));
 
 	}
 }

@@ -2,13 +2,10 @@
 @section('section')
 
 <div class = "container">
-
-	<p> Name: </p> 
 	<br>
-	<p> Mobile No: </p>
+	<p> Name: {{ $customers->first_name }}</p> 
+	<p> Mobile No: {{ $customers->mobile_number }} </p>
+	<p> Amount spent:  {{ $redeemcst->total_amount }} </p>
+	<p> Points Received now: {{ $redeemcst->point }} </p>
 	<br>
-	<p> Amount spent: </p> {{ $redeemcst->total_amount }}
-	<br>
-	<p> Points Received now: </p> {{ $redeemcst->point }}
-
 @endsection
