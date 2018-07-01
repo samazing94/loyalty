@@ -19,7 +19,7 @@ class ShopsController extends Controller
     	return view('shop/shops', compact('title', 'shops'));
     }
 
-    public function register()
+    public function create()
     {
     	$title = "Restaurant Registration";
     	return view('shop/register', compact('title'));
@@ -31,7 +31,7 @@ class ShopsController extends Controller
     	return view('shop/fail');
     }
 
-    public function create(Request $request)
+    public function store(Request $request)
     {
     	// shop_name', 'shop_code', 'shop_manager_name', 'shop_contact', 'address', 'status'
 		$shop_name = $request->input('shop_name');
@@ -69,6 +69,7 @@ class ShopsController extends Controller
     }
     // public function __construct()
     // {
+    //     $this->middleware('permission:merchant');
     // 	$this->middleware('permission:create', ['only' => ['create', 'store']]);
     // 	$this->middleware('permission:edit', ['only' => ['edit', 'update']]);
     // 	$this->middleware('permission:delete', ['only' => ['show', 'delete']]);

@@ -8,13 +8,19 @@ use Redirect;
 use DataTables;
 use Carbon\Carbon;
 use App\Customer;
-use App\
 use DB;
 
 class CustomerController extends Controller
 {
 
-   public function customer()
+	public function index()
+	{
+		$title = 'Loyalty Customer';
+		$customers = \App\Customer::all();
+		return view('customer/index', compact('title', 'customers'));
+	}
+
+	public function customer()
 	{
 		//$title = 'Loyalty Customer';
 		$customers = \App\Customer::all();
@@ -26,17 +32,12 @@ class CustomerController extends Controller
 		$customers = \App\Customer::all();
 		return view('pushpull');
 	}
-	public function register()
+	public function create()
 	{
 		$title = 'Loyalty Sign Up';
 		return view('\customer\register', compact('title'));
 	}
-
-	 // public function success($rst) 
-	 // {
-	 // 	//return "Thank you for registering to " + $rst->hotkey + " for "+ $rst->subhotkey + " \n You got 100 Points!";
-	 // }
-	public function create(Request $request)
+	public function store(Request $request)
 	{
 		$mobile_number = $request->input('mobile_number');
 		$firstname = $request->input('firstname');
@@ -44,15 +45,6 @@ class CustomerController extends Controller
 		$dob = $request->input('dob');
 		$profession = $request->input('profession');
 		$location = $request->input('location');
-		
-/*
-'mobile_number',
-		'firstname',
-		'lastname',
-		'dob',
-		'profession',
-		'location', 
-		*/
 
 		$rst = array('mobile_number' => $mobile_number, 'first_name' => $firstname, 'last_name' => $lastname, 'dob' => $dob, 'profession' => $profession, 'location' => $location);
 		DB::table('customerinfo')->insert($rst);
@@ -61,10 +53,28 @@ class CustomerController extends Controller
 		//return 'xyz';
 		return view('\customer\create');
 	}
+	public function update(Request $request)
+    {
+        $datetime = Carbon::now();
+        Customer::where('id', $request->id)->update(['mobile_number' => $request->mobile_number, 'first_name' => $request->first_name, 'last_name' => $request->last_name, 'dob' => $request->dob, 'profession' => $request->profession]);
+
+        return response()->json(['mobile_number' => $request->mobile_number, 'first_name' => $request->first_name, 'last_name' => $request->last_name, 'dob' => $request->dob, 'profession' => $request->profession]);
+    }
+    public function show(Request $request)
+    {
+        Customer::where('id', $request->id)->delete();
+
+        return response()->json(['id' => $request->id]);
+    }
 
 	public function getPosts()
 	{
 		return \DataTables::of(Customer::query())->make(true);
 		//return datatables()->of(Restaurant::query())->toJson();
+	}
+
+	public function __construct()
+	{
+	    $this->middleware('permission:create', ['only' => ['create', 'store']]);
 	}
 }

@@ -34,12 +34,19 @@ Route::post('/restaurant/create', 'DataTableController@create');
 Route::post('/restaurant/update', 'DataTableController@update');
 Route::post('/restaurant/delete', 'DataTableController@delete');*/
 
+//resources/rules
+
+
+// Route::resource('users', 'UserController');
+// Route::resource('roles', 'RolesController');
+
+
 //shop list
 Route::get('/shop', 'ShopsController@index');
-Route::get('/shop/register', 'ShopsController@register');
+Route::get('/shop/register', 'ShopsController@create');
 
 //datatable operations
-Route::post('/shop/success', 'ShopsController@create');
+Route::post('/shop/success', 'ShopsController@store');
 Route::get('/shop/fail', 'ShopsController@fail');
 Route::post('/shop/update', 'ShopsController@update');
 Route::post('/shop/delete', 'ShopsController@delete');
@@ -50,11 +57,26 @@ Route::get('/pushpull', 'CustomerController@pushpull');
 //Route::get('/customer/success', 'CustomerController@success');
 
 //customer operations
+Route::get('customer/index', 'CustomerController@index');
+Route::get('customer/register', 'CustomerController@create');
 
-Route::get('customer/register', 'CustomerController@register');
+Route::post('/customer/create', 'CustomerController@store');
+Route::post('/customer/update', 'CustomerController@update');
+Route::post('/customer/delete', 'CustomerController@delete');
 
-Route::post('/customer/create', 'CustomerController@create');
 //point mgt
 Route::get('/offerlist', 'PointsController@index');
+Route::get('/offerlist/register', 'PointsController@create');
+
+
+//Route::post('/offerlist/create', 'PointsController@store');
+Route::post('/offerlist/success', 'PointsController@store');
+Route::get('/offerlist/fail', 'PointsController@fail');
 Route::post('/offerlist/calculate', 'PointsController@calculate');
 //
+
+//report
+
+Route::get('report/customer/{id}', function ($id) {
+    //
+});

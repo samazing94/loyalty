@@ -70,6 +70,11 @@ return [
             'model' => App\User::class,
             'table' => 'users',
         ],
+        'merchants' => [
+            'driver' => 'eloquent',
+            'model' => App\Merchant::class,
+            'table' => 'merchant_info',
+        ],
 
         // 'users' => [
         //     'driver' => 'database',

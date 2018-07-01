@@ -3,7 +3,9 @@
 
 <div class="container">
 	<div class = "container">
-		
+	@if (Session::has('message'))
+   		<div class="alert alert-info">{{ Session::get('message') }}</div>
+	@endif
 	</div>
 		<div class="clearfix"></div>
 		<div class="row">
@@ -15,18 +17,23 @@
 					<div class="x_content">
 						<br />
 						<form method="post" onsubmit = "tosubmit()" action="{{ url('offerlist/calculate') }}" data-parsley-validate class="form-horizontal form-label-left">
-							<select id= "name" name="name">
-								<option value="LoyalPow">Loyal Pow</option>
-								<option value="BuffetFiesta">Buffet Fiesta</option>
-							</select>
-							
-							<script type="text/javascript">
-					   			 function setTextField(ddl) {
-					        		document.getElementById('name').value = ddl.options[ddl.selectedIndex].text;
-					    		}
-							</script>
+							<div class ="form-group">
+								<label  class="control-label col-md-3 col-sm-3 col-xs-12" for="sel1">Select list:</label>
+								<div class="col-md-6 col-sm-6 col-xs-12">
+									<select class="form-control" id="name" name="name">
+									    <option value= "LoyalPow" >Loyal Pow</option>
+									    <option value="BuffetFiesta">Buffet Fiesta</option>
+									</select>
+									<script type="text/javascript">
+						   					function setTextField(ddl) {
+						        				document.getElementById('name').value = ddl.options[ddl.selectedIndex].text;
+						    			}
+									</script>
+								</div>
+							</div>
 
 							<div class="form-group">
+								
 								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="mobile_number">Phone No. <span class="required">*</span>
 								</label>
 								<div class="col-md-6 col-sm-6 col-xs-12">

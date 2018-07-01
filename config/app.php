@@ -164,7 +164,7 @@ return [
         Zizaco\Entrust\EntrustServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
-
+        Spatie\Permission\PermissionServiceProvider::class,
     ],
 
     /*

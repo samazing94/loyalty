@@ -232,7 +232,7 @@
 									</a>
 
 									<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-										@csrf
+										{{ csrf_field() }}
 									</form>
 							</li>
 						</ul>
@@ -281,7 +281,7 @@
 								<a href="#"><i class="fas fa-user-circle"></i> Customer Managment<span class="fa arrow"></span></a>
 								<ul class="nav nav-second-level">
 									<li>
-										<a href="{{ url ('blank') }}">Manage Customers</a>
+										<a href="{{ url ('/customer/index') }}">Manage Customers</a>
 									</li>
 									<li>
 										<a href="{{ url('/customer/register') }}">Create New Customer</a>
@@ -299,10 +299,10 @@
 										<a href="#">Point Offers</a>		
 									</li>
 									<li>
-										<a href="{{ url('/offerlist')}}}">Process Point Orders</a>		
+										<a href="{{ url('/offerlist')}}">Process Point Orders</a>		
 									</li>
 									<li>
-										<a href="{{ url ('blank') }}">Create Create Offer</a>
+										<a href="{{ url ('/offerlist/register') }}">Create Create Offer</a>
 									</li>
 								</ul>
 								<!-- /.nav-second-level -->

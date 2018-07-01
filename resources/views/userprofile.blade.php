@@ -31,7 +31,4 @@
                 </tr>
             </tbody>
         </table>
-     <!--    <a href="{{ url('/restaurant') }}">List of Restaurants</a>
-        <br>
-        <a href="{{ url('/restaurant/register') }}">Register Restaurants</a> -->
 @endsection

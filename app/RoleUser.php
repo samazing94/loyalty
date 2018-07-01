@@ -10,10 +10,4 @@ class role_user extends Model
     protected $fillable = [
         'user_id', 'role_id',
     ];
-
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
 }

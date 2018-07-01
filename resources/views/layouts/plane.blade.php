@@ -11,6 +11,7 @@
 	<meta content="width=device-width, initial-scale=1" name="viewport"/>
 	<meta content="" name="description"/>
 	<meta content="" name="author"/>
+	<meta name="csrf-token" content="{{ csrf_token() }}">
 
 	<link rel="stylesheet" href="{{ asset("assets/stylesheets/style.css") }}" />
 	<!-- <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"> -->
