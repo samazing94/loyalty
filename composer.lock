@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "74db05ce51a3913f7123677b026c8ff6",
+    "content-hash": "dce1bc54ba4b25744941306c3cecfef0",
     "packages": [
         {
             "name": "barryvdh/laravel-debugbar",
@@ -345,6 +345,59 @@
                 "tokenizer"
             ],
             "time": "2018-03-21T22:21:57+00:00"
+        },
+        {
+            "name": "jimmyjs/laravel-report-generator",
+            "version": "1.0.18",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Jimmy-JS/laravel-report-generator.git",
+                "reference": "3be9545f2eb1659f2f4a77b8882fd6de115fc2e4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Jimmy-JS/laravel-report-generator/zipball/3be9545f2eb1659f2f4a77b8882fd6de115fc2e4",
+                "reference": "3be9545f2eb1659f2f4a77b8882fd6de115fc2e4",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "~5",
+                "maatwebsite/excel": "~2.1.0",
+                "php": ">=5.5.9"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Jimmyjs\\ReportGenerator\\ServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Jimmyjs\\ReportGenerator\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jimmy Setiawan",
+                    "email": "jimmysetiawan.js@gmail.com"
+                }
+            ],
+            "description": "Rapidly Generate Simple Pdf & Excel Report on Laravel 5 (Using Barryvdh/DomPdf or Barryvdh/laravel-snappy & maatwebsite/excel)",
+            "keywords": [
+                "excel",
+                "excel report",
+                "laravel",
+                "pdf",
+                "pdf report",
+                "report"
+            ],
+            "time": "2018-06-12T02:50:56+00:00"
         },
         {
             "name": "laravel/framework",

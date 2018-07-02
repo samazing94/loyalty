@@ -17,8 +17,15 @@ use Session;
 
 class PointsController extends Controller
 {
+	public function view()
+	{
+		$orders = Point::all();
+		return view('offers/list', compact('orders'));
+	}
+
 	public function index()
 	{
+
 		return view('offers/offerlist');
 	}
 
@@ -27,10 +34,9 @@ class PointsController extends Controller
 		return view('offers/register');
 	}
 
-	public function store()
+	public function store(Request $request)
 	{
-
-		$merchant = DB::table('merchant_shop')->where('merchant_id', $merchant_id)->first();
+		$merchant = DB::table('merchant_shop')->where('merchant_id', $request->merchant_id)->first();
 		$name = $request->input('name');
 		$description = $request->input('description');
 		$min_amount = $request->input('min_amount');
@@ -50,7 +56,6 @@ class PointsController extends Controller
 			return redirect()->to('offers/fail');
 		}
   	}
-
 
 	public function calculate(Request $request)
 	{
@@ -78,13 +83,7 @@ class PointsController extends Controller
 		if($customers)
 		{
 			$pointamt = $dec + $points->point;
-			//$cst_point = $cst_point + $pointamt; //customers always start with 100 point by default via registration;
-			// DB::table('point_rule')
-			// 	->where('name', $name)
-			// 	->update(['point' => $pointamt, 'min_amount' => $points->min_amount]);
-				//dd($amount);
-			// if(!$redeemcst)
-			// {
+
 				DB::table('shop_redeemed')->insert(['point_rule_id' => $points->id, 'shop_id' => $merchant->shop_id, 'customerinfo_id' => 
 					$customers->id, 'total_amount' => $amount, 'point' => $pointamt, 'updated_by' => $points->merchant_id]);
 
@@ -106,10 +105,20 @@ class PointsController extends Controller
 
 		$redeemcst = DB::table('shop_redeemed')->where('customerinfo_id', $customers->id)->first();
 		return view('calculate', compact('redeemcst', 'customers'));
-
 	}
-// 	public function __construct()
-// 	{
-//    		$this->middleware('permission:create', ['only' => ['create', 'store']]);     
-// 	}
+	public function update(Request $request)
+	{
+		//$offer_s = new Carbon($request->offer_start);
+		//$offer_e = new Carbon($request->offer_end);
+        Point::where('id', $request->id)->update(['name' => $request->name, 'min_amount' => $request->min_amount, 'point' => $request->point, 'merchant_id' => $request->merchant_id, 'offer_start' => $request->offer_start, 'offer_end' => $request->offer_end]);
+
+        return response()->json(['name' => $request->name, 'min_amount' => $request->min_amount, 'point' => $request->point, 'merchant_id' => $request->merchant_id,  'offer_start' => $request->offer_start, 'offer_end' => $request->offer_end]);
+	}
+
+	public function delete(Request $request)
+	{
+		Point::where('id', $request->id)->delete();
+
+        return response()->json(['id' => $request->id]);
+	}
 }

@@ -19,7 +19,7 @@ class UserController extends Controller
 
 	public function userprofile(){
 
-		$user = \App\User::all();
+		$user = User::all();
 		return view('userprofile', compact('users'));
 	}
 

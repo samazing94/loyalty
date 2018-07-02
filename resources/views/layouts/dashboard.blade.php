@@ -296,13 +296,13 @@
 								<a href="#"><i class="fas fa-user-circle"></i> Shop Point Management<span class="fa arrow"></span></a>
 								<ul class="nav nav-second-level">
 									<li>
-										<a href="#">Point Offers</a>		
+										<a href="{{ url('/offerlist/list')}}">Point Offers</a>		
 									</li>
 									<li>
 										<a href="{{ url('/offerlist')}}">Process Point Orders</a>		
 									</li>
 									<li>
-										<a href="{{ url ('/offerlist/register') }}">Create Create Offer</a>
+										<a href="{{ url ('/offerlist/register') }}">Create Offer</a>
 									</li>
 								</ul>
 								<!-- /.nav-second-level -->
@@ -313,7 +313,13 @@
 								<a href="#"><i class="fa fa-files-o fa-fw"></i> Report Management<span class="fa arrow"></span></a>
 								<ul class="nav nav-second-level">
 									<li>
-										<a href="{{ url ('blank') }}">List of Reports</a>
+										<a href="{{ url ('report/') }}">List of Reports</a>
+									</li>
+									<li>
+										<a href="{{ url ('report/customer') }}">List of Customer Reports</a>
+									</li>
+									<li>
+										<a href="{{ url ('report/sms') }}">List of SMS Log Reports</a>
 									</li>
 						<!-- 			<li>
 										 @else

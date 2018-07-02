@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class SMS extends Model
 {
-	protected $table = 'smslog'
+	protected $table = 'smslog';
 	public $primaryKey = 'id';
 	protected $fillable = [
 		'hotkey',
