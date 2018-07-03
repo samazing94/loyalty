@@ -29,6 +29,7 @@
 	// $dob = $sms_body[3];	
 	// $profession = $sms_body[4];
 	// $location = $sms_body[5];
+	//$segmented = explode(' ', $sms);
 
 	$subhotkey = !empty($sms_body[1]) ? $sms_body[1] : "NULL";
 	
@@ -76,7 +77,7 @@
 			$reply_body = "This number is already registered";
 			$status = 0;
 			echo $reply_body;
-			$sql2 = "INSERT INTO smslog (hotkey, msisdn, sms_body, status, reply_body ) VALUES ('$hotkey', '$msisdn', '$sms', $status, '$reply_body')";
+			$sql2 = "INSERT INTO smslog (hotkey, subhotkey, msisdn, sms_body, status, reply_body ) VALUES ('$hotkey','$subhotkey','$msisdn', '$sms', $status, '$reply_body')";
 			mysqli_query($conn, $sql2);	
 		}
 		else //if(!$rowcount)
@@ -97,7 +98,7 @@
 			{
 				$reply_body = "Subhotkey is incorrect, please try again";
 				$status = 0;
-				$sql2 = "INSERT INTO smslog (hotkey, msisdn, sms_body, status, reply_body ) VALUES ('$hotkey', '$msisdn', '$sms', $status, '$reply_body')";
+				$sql2 = "INSERT INTO smslog (hotkey, subhotkey, msisdn, sms_body, status, reply_body ) VALUES ('$hotkey','$subhotkey','$msisdn', '$sms', $status, '$reply_body')";
 				mysqli_query($conn, $sql2);
 				echo $reply_body;
 				
@@ -116,7 +117,7 @@
 					addslashes($reply_body);
 					echo $reply_body;
 					$status = 0;
-					$sql2 = "INSERT INTO smslog (hotkey, msisdn, sms_body, status, reply_body ) VALUES ('$hotkey', '$msisdn', '$sms', $status, '$reply_body')";
+					$sql2 = "INSERT INTO smslog (hotkey, subhotkey, msisdn, sms_body, status, reply_body ) VALUES ('$hotkey','$subhotkey','$msisdn', '$sms', $status, '$reply_body')";
 					mysqli_query($conn, $sql2);
 					echo $reply_body;
 				}
@@ -125,7 +126,7 @@
 					$status = 1;
 					$reply_body = "Thank you for registering, you got 100 points!";
 					
-					$sql2 = "INSERT INTO smslog (hotkey, msisdn, sms_body, status, reply_body ) VALUES ('$hotkey', '$msisdn', '$sms', $status, '$reply_body')";
+					$sql2 = "INSERT INTO smslog (hotkey, subhotkey, msisdn, sms_body, status, reply_body ) VALUES ('$hotkey','$subhotkey','$msisdn', '$sms', $status, '$reply_body')";
 					$sql = "INSERT INTO customerinfo (mobile_number, first_name, last_name, dob, profession, location) VALUES ('$mobile_number', '$firstname', '$lastname', '$dob', '$profession','$location')";
 					mysqli_query($conn, $sql);
 					mysqli_query($conn, $sql2);

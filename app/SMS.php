@@ -10,6 +10,7 @@ class SMS extends Model
 	public $primaryKey = 'id';
 	protected $fillable = [
 		'hotkey',
+		'subhotkey',
 		'msisdn',
 		'sms_body',
 		'status',

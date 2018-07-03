@@ -70,20 +70,6 @@
 								<input type="text" class="form-control" id="address">
 							</div>
 						</div>
-					
-						<div class="form-group">
-							<label class="control-label col-sm-2" for="created_by">Created By</label>
-							<div class="col-sm-10">
-								<input type="text" class="form-control" id="created_by" disabed>
-							</div>
-						</div>
-					
-						<div class="form-group">
-							<label class="control-label col-sm-2" for="updated_by">Updated by</label>
-							<div class="col-sm-10">
-								<input type="text" class="form-control" id="updated_by" disabed>
-							</div>
-						</div>					
 
 					</form>
 
@@ -200,8 +186,6 @@
 				'shop_manager_name': $('#shop_manager_name').val(),
 				'shop_contact': $('#shop_contact').val(),
 				'address': $('#address').val(),
-				'created_by': $('#created_by').val(),
-				'updated_by': $('#updated_by').val(),
 
 			},
 			success: function(response) {
@@ -210,8 +194,6 @@
 				$('.shop' + response.id).find('.shop_manager_name').text(response.shop_manager_name);
 				$('.shop' + response.id).find('.shop_contact').text(response.shop_contact);
 				$('.shop' + response.id).find('.address').text(response.address);
-				$('.shop' + response.id).find('.created_by').text(response.created_by);
-				$('.shop' + response.id).find('.updated_by').text(response.updated_by); 
 			}
 		});
 	});
@@ -240,8 +222,6 @@
 		$('#shop_manager_name').val(details[3]);
 		$('#shop_contact').val(details[4]);
 		$('#address').val(details[5]);
-		$('#created_by').val(details[6]);
-		$('#updated_by').val(details[7]);
 	}
 </script>
  @endsection

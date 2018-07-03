@@ -1,0 +1,111 @@
+.bg
+{
+	background-image: url("../img/background2.jpg");
+	width: auto;
+	height:1080px;
+	background-repeat: no-repeat;
+	align-content: center;
+	background-color:#030303;
+}
+/*top nav bar */
+.navbar
+{
+	margin-bottom: -22px;
+}
+.navbar-default
+{
+	background-color: #282828;
+}
+.navbar-default .navbar-brand
+{
+	color: #d9b310;
+}
+.navbar-default .navbar-brand:hover
+{
+	color: #e3e2df;
+}
+.navbar-brand:hover
+{
+	color:#5e5e5e;
+}
+.navbar-default .navbar-nav> li> a, .navbar-default .navbar-text
+{
+	color: #d9b310;
+}
+.navbar-default .navbar-nav> li> a:hover
+{
+	color: #e3e2df;
+}
+
+.col-md-8 {
+    width: 40em;
+}
+
+.col-md-offset-2 {
+	padding-top:15em;
+    margin-left: 43em;
+}
+
+/*panel*/
+.panel-default
+{
+	background-color: #565857;
+	opacity:0.8;
+}
+body
+{
+	/*color:#2a2b2b;*/
+	color:#ffffff;
+}
+.panel-body
+{
+
+}
+.panel-default>.panel-heading
+{
+    color: #333;
+    background-color: #fff;
+    border-color: #d3e0e9;
+}
+.panel-heading
+{
+    padding: 10px 15px;
+    border-bottom: 1px solid transparent;
+    border-top-right-radius: 3px;
+    border-top-left-radius: 3px;
+}
+/*dabc88*/
+
+/*button loginbutton*/
+.btnlog
+{
+	color: #e3e2df;
+	background-color: #1d2731;
+    border-color: #e3e2df;
+
+}
+.btnlog:hover
+{
+	color: #ffffff;
+	background-color: #071215;
+    border-color: #e3e2df;
+}
+.btnlog:focus
+{
+	color: #ffffff;
+	background-color: #1d2731;
+    border-color: #d9b310;
+}
+.linkb 
+{
+	color: #e3e2df;
+}
+.linkb:hover 
+{
+	color: #ffffff;
+	text-decoration: none;
+}
+.btsize
+{
+	width:17em;
+}

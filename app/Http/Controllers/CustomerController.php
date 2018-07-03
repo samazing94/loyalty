@@ -46,6 +46,8 @@ class CustomerController extends Controller
 		$profession = $request->input('profession');
 		$location = $request->input('location');
 
+		//work on validation here;
+		
 		$rst = array('mobile_number' => $mobile_number, 'first_name' => $firstname, 'last_name' => $lastname, 'dob' => $dob, 'profession' => $profession, 'location' => $location);
 		DB::table('customerinfo')->insert($rst);
 		//success($rst);
@@ -73,8 +75,8 @@ class CustomerController extends Controller
 		//return datatables()->of(Restaurant::query())->toJson();
 	}
 
-	public function __construct()
-	{
-	    $this->middleware('permission:create', ['only' => ['create', 'store']]);
-	}
+	// public function __construct()
+	// {
+	//     $this->middleware('permission:create', ['only' => ['create', 'store']]);
+	// }
 }

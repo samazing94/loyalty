@@ -13,7 +13,7 @@
 	<meta content="" name="author"/>
 	<meta name="csrf-token" content="{{ csrf_token() }}">
 
-	<link rel="stylesheet" href="{{ asset("assets/stylesheets/style.css") }}" />
+	<link rel="stylesheet" href="{{ asset("	assets/stylesheets/psuedo.css") }}" />
 	<!-- <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"> -->
 	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.17/css/jquery.dataTables.min.css">
 	<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.5.2/css/buttons.dataTables.min.css">

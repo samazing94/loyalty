@@ -59,7 +59,7 @@ class ReportController extends Controller
 		// $customer = DB::table('customerinfo')->where('id', $cst_id)->first();
 		// $customer_redeem = DB::table('shop_redeemed')->where('customerinfo_id', $customer->id)->first();
 
-		$customer = \App\Customer::leftJoin('shop_redeemed', 'customerinfo.id', '=', 'shop_redeemed.customerinfo_id')->select('customerinfo.id', 'customerinfo.mobile_number', 'customerinfo.first_name', 'customerinfo.last_name', 'customerinfo.dob', 'customerinfo.profession', 'customerinfo.location', 'shop_redeemed.point', 'shop_redeemed.total_amount')->where('customerinfo_id', $cst_id)->get();		
+		$customer = \App\Customer::leftJoin('shop_redeemed', 'customerinfo.id', '=', 'shop_redeemed.customerinfo_id')->select('customerinfo.id', 'customerinfo.mobile_number', 'customerinfo.first_name', 'customerinfo.last_name', 'customerinfo.dob', 'customerinfo.profession', 'customerinfo.location', 'shop_redeemed.point', 'shop_redeemed.total_amount')->where('customerinfo_id', $cst_id)->get();	
 		//dd($customer);
 		//$title = $customer->first_name . "'s Report";
 		//return view('/report/customer/', ['id' => $cst_id], compact('customer', 'customer_redeem'));

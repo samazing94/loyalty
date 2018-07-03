@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', 'Sidonia'),
 
     /*
     |--------------------------------------------------------------------------
@@ -164,7 +164,6 @@ return [
         Zizaco\Entrust\EntrustServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
-        Spatie\Permission\PermissionServiceProvider::class,
         Jimmyjs\ReportGenerator\ServiceProvider::class,
     ],
 

@@ -19,6 +19,7 @@
 				<tr>
 					<th class="text-center">Serial No.</th>
 					<th class="text-center">Hot Key</th>
+					<th class="text-center">Sub Hot Key</th>
 					<th class="text-center">MSISDN</th>
 					<th class="text-center">SMS Body</th>
 					<th class="text-center">Status</th>
@@ -32,6 +33,7 @@
 			<tr class="sms{{$sms->id}}">
 				<td class="fid">{{++$i}}</button></td>
 				<td class="mobile_number">{{$sms->hotkey}}</td>
+				<td class="subhotkey">{{$sms->subhotkey}}</td>
 				<td class="last_name">{{$sms->msisdn}}</td>
 				<td class="last_name">{{$sms->sms_body}}</td>
 				<td class="dob"><?php 

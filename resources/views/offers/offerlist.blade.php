@@ -22,7 +22,7 @@
 								<div class="col-md-6 col-sm-6 col-xs-12">
 									<select class="form-control" id="name" name="name">
 									    <option value= "LoyalPow" >Loyal Pow</option>
-									    <option value="BuffetFiesta">Buffet Fiesta</option>
+									    <option value= "Buffet Fiesta" >Buffet Fiesta</option>
 									</select>
 									<script type="text/javascript">
 						   					function setTextField(ddl) {
