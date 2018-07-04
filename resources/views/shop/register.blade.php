@@ -6,7 +6,12 @@
 	{{ $title }}
 
 @endsection
-<div class="">
+<div class="container">
+	<div class="container">
+	@if (Session::has('message'))
+   		<div class="alert alert-info">{{ Session::get('message') }}</div>
+	@endif
+	</div>
 		<div class="clearfix"></div>
 		<div class="row">
 			<div class="col-md-12 col-sm-12 col-xs-12">
@@ -55,7 +60,7 @@
 								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="shop_manager_name">Shop Contact <span class="required">*</span>
 								</label>
 								<div class="col-md-6 col-sm-6 col-xs-12">
-									<input type="text" value="{{ Request::old('shop_contact') ?: '' }}" id="shop_contact" name="shop_contact" class="form-control col-md-7 col-xs-12" required = "required">
+									<input type="text" value="{{ Request::old('shop_contact') ?: '' }}" id="shop_contact" name="shop_contact" class="form-control col-md-7 col-xs-12" required = "required" ng-pattern="/^(?:\+88|01)?(?:\d{11}|\d{13})$/">
 									@if ($errors->has('shop_contact'))
 									<span class="help-block">{{ $errors->first('shop_contact') }}</span>
 									@endif

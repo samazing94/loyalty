@@ -13,7 +13,8 @@
 	{{$i = NULL}}
 	@foreach($shops as $shop)
 		<tr class="shop{{$shop->id}}">
-			<td class="fid">{{++$i}}</td>
+			<td class="id">{{++$i}}</td>
+			<input type="hidden" id="fid" name="fid" value='{{$shop->id}}'>
 			<td class="shop_name">{{$shop->shop_name}}</td>
 			<td class="shop_code">{{$shop->shop_code}}</td>
 			<td class="shop_manager_name">{{$shop->shop_manager_name}}</td>
@@ -30,4 +31,3 @@
 		</tr>
 	@endforeach
 </table>
-		

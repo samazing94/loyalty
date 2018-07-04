@@ -70,19 +70,6 @@
 									</li>
 								</ul>
 							</li>
-			<!-- 				<!-- SMS Management -->
-							<li>
-								<a href="/loyalty/pushpull.php?msisdn=&sms="><i class="fas fa-envelope"></i> SMS Management<span class="fa arrow"></span></a>
-								<ul class="nav nav-second-level">
-									<li>
-										<a href="#">SMS List</a>
-									</li>
-									<li>
-										<a href="#">SMS Pending</a>
-									</li>
-								</ul>
-							</li> -->
-
 							<!-- Customer Management -->
 
 							<li>

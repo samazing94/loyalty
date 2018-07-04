@@ -81,7 +81,7 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="#">
+                        <a href="{{url('offerlist/list')}}">
                             <div class="panel-footer">
                                 <span class="pull-left">View Details</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -94,45 +94,3 @@
                     
                     <!-- /.panel -->
 @endsection
-<!-- @section('scripts')
-<script src="{{ asset('js/jquery.dataTables.min.js') }}"></script>
-<script src="{{ asset('js/jquery.dataTables.bootstrap.min.js') }}"></script>
-<script>
-     jQuery(function($) {
-    //initiate dataTables plugin
-    var myTable = 
-    $('#pageTable')
-    //.wrap("<div class='dataTables_borderWrap' />")   //if you are applying horizontal scrolling (sScrollX)
-    .DataTable( {
-        bAutoWidth: false,
-        "aoColumns": [
-            null,
-            null,
-            null
-        ],
-        "aaSorting": [],
-        
-        
-        //"bProcessing": true,
-        //"bServerSide": true,
-        //"sAjaxSource": "http://127.0.0.1/table.php"   ,
-
-        //,
-        //"sScrollY": "200px",
-        //"bPaginate": false,
-
-        //"sScrollX": "100%",
-        //"sScrollXInner": "120%",
-        //"bScrollCollapse": true,
-        //Note: if you are applying horizontal scrolling (sScrollX) on a ".table-bordered"
-        //you may want to wrap the table inside a "div.dataTables_borderWrap" element
-
-        //"iDisplayLength": 50
-
-
-            select: {
-                style: 'multi'
-            }
-        });
-    });
-</script> -->

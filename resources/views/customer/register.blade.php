@@ -6,7 +6,12 @@
 	{{ $title }}
 
 @endsection
-<div class="">
+<div class="container">
+	@if (Session::has('message'))
+   		<div class="alert alert-info">{{ Session::get('message') }}</div>
+	@endif
+</div>
+<div class = "container">
 		<div class="clearfix"></div>
 		<div class="row">
 			<div class="col-md-12 col-sm-12 col-xs-12">

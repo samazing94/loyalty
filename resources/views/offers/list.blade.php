@@ -17,7 +17,8 @@
 			 {{$i = NULL}}
 			 @foreach($orders as $order)
 			<tr class="order{{$order->id}}">
-				<td class="fid">{{++$i}}</button></td>
+				<td class="id">{{++$i}}</button></td>
+				<input type="hidden" id="fid" name="fid" value='{{$order->id}}'>
 				<td class="name">{{$order->name}}</td>
 				<td class="min_amount">{{$order->min_amount}}</td>
 				<td class="point">{{$order->point}}</td>

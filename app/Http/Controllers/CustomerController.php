@@ -8,6 +8,7 @@ use Redirect;
 use DataTables;
 use Carbon\Carbon;
 use App\Customer;
+use Session;
 use DB;
 
 class CustomerController extends Controller
@@ -17,7 +18,7 @@ class CustomerController extends Controller
 	{
 		$title = 'Loyalty Customer';
 		$customers = \App\Customer::all();
-		return view('customer/index', compact('title', 'customers'));
+		return view('customer.index', compact('title', 'customers'));
 	}
 
 	public function customer()
@@ -35,7 +36,7 @@ class CustomerController extends Controller
 	public function create()
 	{
 		$title = 'Loyalty Sign Up';
-		return view('\customer\register', compact('title'));
+		return view('customer.register', compact('title'));
 	}
 	public function store(Request $request)
 	{
@@ -44,16 +45,35 @@ class CustomerController extends Controller
 		$lastname = $request->input('lastname');
 		$dob = $request->input('dob');
 		$profession = $request->input('profession');
-		$location = $request->input('location');
-
+		$location = $request->input('location');	
+		$this->validate(request(), [
+   			 'mobile_number' => 
+       		 array(
+         	   'required',
+         	   'regex:/^(?:\+88|01)?(?:\d{11}|\d{13})$/',
+       	 	)
+		]);
 		//work on validation here;
-		
-		$rst = array('mobile_number' => $mobile_number, 'first_name' => $firstname, 'last_name' => $lastname, 'dob' => $dob, 'profession' => $profession, 'location' => $location);
-		DB::table('customerinfo')->insert($rst);
-		//success($rst);
-		//return redirect()->to('/customer/success');
-		//return 'xyz';
-		return view('\customer\create');
+		$customer = DB::table('customerinfo')->where('mobile_number', $request->mobile_number)->first();
+		if (!$customer)
+		{
+			$rst = array('mobile_number' => $mobile_number, 'first_name' => $firstname, 'last_name' => $lastname, 'dob' => $dob, 'profession' => $profession, 'location' => $location);
+	
+			DB::table('customerinfo')->insert($rst);
+			
+			//success($rst);
+			//return redirect()->to('/customer/success');
+			//return 'xyz';
+			Session::flash('message', "Customer has successfully registered");
+			//return view('\customer\create');		
+			return Redirect::back();
+		}
+		else
+		{
+			Session::flash('message', "Customer is already registered");
+			return Redirect::back();
+		}
+	
 	}
 	public function update(Request $request)
     {
@@ -62,7 +82,7 @@ class CustomerController extends Controller
 
         return response()->json(['mobile_number' => $request->mobile_number, 'first_name' => $request->first_name, 'last_name' => $request->last_name, 'dob' => $request->dob, 'profession' => $request->profession]);
     }
-    public function show(Request $request)
+    public function delete(Request $request)
     {
         Customer::where('id', $request->id)->delete();
 

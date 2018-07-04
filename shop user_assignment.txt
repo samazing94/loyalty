@@ -1,0 +1,25 @@
+shop user
+	shopid user_id
+	shop id found from shops
+
+merchant user
+	merchantid userid
+
+user
+	id  -> thru auth
+Let user 5 be 
+
+//////////
+user login -> get-> auth id
+	check if it's in shop_id or not
+	found in shop_user table
+	get shop_id
+	check shop_id from which shop in shop_info table
+	get data from shop_info
+
+
+	drop down of shops that have these offers.
+
+	use leftjoin
+	dropdown -> shop name assign
+	-> shop_diary (shop_id, shp_name)

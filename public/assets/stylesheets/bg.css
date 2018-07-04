@@ -1,8 +1,8 @@
 .bg
 {
 	background-image: url("../img/background2.jpg");
-	width: auto;
-	height:1080px;
+	width: 100%;
+	height: auto;
 	background-repeat: no-repeat;
 	align-content: center;
 	background-color:#030303;
@@ -42,7 +42,7 @@
 }
 
 .col-md-offset-2 {
-	padding-top:15em;
+	padding-top: 20em;
     margin-left: 43em;
 }
 

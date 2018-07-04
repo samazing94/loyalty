@@ -8,19 +8,41 @@
 @endsection
 @section('section')
 	<!-- display restaurant list -->
-	<div class = "container">
-		@if (Session::has('message'))
-	   		<div class="alert alert-info">{{ Session::get('message') }}</div>
-		@endif
-	</div>
+	
 	<div class="table-responsive text-center">	
 			<div class="row">
 				<div class="col-sm-12">
-					@section ('table_panel_title','Restaurants')
-					@section ('table_panel_body')
-					@include('widgets.table', array('class'=>''))
-					@endsection
-					@include('widgets.panel', array('header'=>true, 'as'=>'table'))
+					<table class="table {{ $class }}" id="table">
+						<thead>
+							<tr>
+								<th class="text-center">Serial No.</th>
+								<th class="text-center">User ID</th>
+								<th class="text-center">Name</th>
+								<th class="text-center">E-Mail</th>
+								<th class="text-center">Status</th>
+								<th class="text-center">Actions</th>
+							</tr>
+						</thead>
+						{{$i = NULL}}
+						@foreach($users as $user)
+							<tr class="shop{{$shop->id}}">
+								<td class="fid">{{++$i}}</td>
+								<input type="hidden" id="fid" name="fid" value='{{}}''>
+								<td class="shop_name">{{$user->name}}</td>
+								<td class="shop_code">{{$user->email}}</td>
+								<td class="shop_manager_name">{{$user->status}}</td>
+								<td>
+									<button class="edit-modal btn btn-info" value="{{$user->id}},{{$user->name}}, {{$user->email}}, {{$user->status}}">
+										<span class="glyphicon glyphicon-edit"></span> Edit
+									</button>
+									<button class="delete-modal btn btn-danger" value="{{$user->id}},{{$user->name}}">
+										<span class="glyphicon glyphicon-trash"></span> Delete
+									</button>
+								</td>
+							</tr>
+						@endforeach
+					</table>
+
 				</div>
 
 	<!-- modal content -->
@@ -43,7 +65,7 @@
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="control-label col-sm-2" for="shop_name">Shop Name</label>
+							<label class="control-label col-sm-2" for="shop_name">Name</label>
 							<div class="col-sm-10">
 								<input type="text" class="form-control" id="shop_name">
 							</div>
@@ -64,7 +86,7 @@
 						<div class="form-group">
 							<label class="control-label col-sm-2" for="shop_contact">Shop Contact</label>
 							<div class="col-sm-10">
-								<input type="text" class="form-control" id="shop_contact" pattern="/^(?:\+88|01)?(?:\d{11}|\d{13})$/">
+								<input type="text" class="form-control" id="shop_contact">
 							</div>
 						</div>
 
@@ -182,11 +204,11 @@
 
 		$.ajax({
 			type: 'post',
-			url: "{{ url('/shop/update') }}",
+			url: "{{ url('/list/update') }}",
 			data: {
 				'id'  : $('#fid').val(),
-				'shop_name': $('#shop_name').val(),
-				'shop_code': $('#shop_code').val(),
+				'name': $('#shop_name').val(),
+				'email': $('#shop_code').val(),
 				'shop_manager_name': $('#shop_manager_name').val(),
 				'shop_contact': $('#shop_contact').val(),
 				'address': $('#address').val(),
@@ -206,7 +228,7 @@
 	
 		$.ajax({
 			type: 'post',
-			url: "{{ url('/shop/delete') }}",
+			url: "{{ url('/list/delete') }}",
 			data: {
 				'id': $('.did').text()
 			},

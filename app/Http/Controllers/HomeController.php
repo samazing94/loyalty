@@ -8,6 +8,8 @@ use App\User;
 use App\Customer;
 use App\SMS;
 use App\Point;
+use DB;
+use Auth;
 use Carbon\Carbon;
 
 class HomeController extends Controller
@@ -40,7 +42,18 @@ class HomeController extends Controller
         $pointoffer = Point::count();
         $newoffer = Point::whereDate('created_at', [Carbon::now()->setTime(0,0)->format('Y-m-d H:i:s')])->get();
         $c_off = count($newoffer);
-        return view('home', compact('customers', 'smslog', 'pointoffer', 'c_off'));       
+
+        $userSession = Auth::user()->id;
+        $user = DB::table('shop_info')->select('shop_info.id', 'shop_info.shop_name')
+        ->leftJoin('shop_user', 'shop_user.shop_id', '=', 'shop_info.id')
+        ->leftJoin('users', 'users.id', '=', 'shop_user.user_id')->where('shop_user.user_id', $userSession)->first();
+
+        //check if user is part of merchant
+        if ($user)
+        {
+            return view('home', compact('customers', 'smslog', 'pointoffer', 'c_off'));
+        }
+            return view('/customer/fail');
     }
     // public function get_datatable()
     // {

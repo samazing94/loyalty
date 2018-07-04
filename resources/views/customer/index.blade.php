@@ -8,12 +8,12 @@
 @endsection
 @section('section')
 	<!-- display restaurant list -->
-	
+<div class ="container">
 	<div class="table-responsive text-center">	
 		<table class="table" id="table">
 			<thead>
 				<tr>
-					<th class="text-center">ID</th>
+					<th class="text-center">Serial No.</th>
 					<th class="text-center">Mobile Number</th>
 					<th class="text-center">First Name</th>
 					<th class="text-center">Last Name</th>
@@ -23,9 +23,11 @@
 					<th class="text-center">Actions</th>
 				</tr>
 			</thead>
+			{{$i = NULL}}
 			 @foreach($customers as $customer)
 			<tr class="customer{{$customer->id}}">
-				<td class="fid">{{$customer->id}}</td>
+				<td class="id">{{++$i}}</td>
+				<input type="hidden" id="fid" name="fid" value='{{$customer->id}}'>
 				<td class="mobile_number">{{$customer->mobile_number}}</td>
 				<td class="first_name">{{$customer->first_name}}</td>
 				<td class="last_name">{{$customer->last_name}}</td>
@@ -67,7 +69,7 @@
 						<div class="form-group">
 							<label class="control-label col-sm-2" for="mobile_number">Mobile No.</label>
 							<div class="col-sm-10">
-								<input type="text" class="form-control" id="mobile_number">
+								<input type="text" class="form-control" id="mobile_number" ng-pattern="/^(?:\+88|01)?(?:\d{11}|\d{13})$/">
 							</div>
 						</div>
 						<div class="form-group">
@@ -121,6 +123,7 @@
 			</div>
 		</div>
 	</div>
+</div>
 @endsection
 
 @section('scripts')
