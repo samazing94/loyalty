@@ -23,3 +23,9 @@ user login -> get-> auth id
 	use leftjoin
 	dropdown -> shop name assign
 	-> shop_diary (shop_id, shp_name)
+
+
+get rid of merchant id in front views
+fix dashboard -> provide whole view folder tomorrow after fix
+get merchant id auth running
+make required "*" red
