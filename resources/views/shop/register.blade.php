@@ -24,7 +24,7 @@
 						<form method="post" action="{{ url('shop/success') }}" data-parsley-validate class="form-horizontal form-label-left">
 
 							<div class="form-group">
-								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="shop_name">Shop Name <span class="required">*</span>
+								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="shop_name">Shop Name <span class="required"><span style="color:red;">*</span></span>
 								</label>
 								<div class="col-md-6 col-sm-6 col-xs-12">
 									<input type="text" value="{{ Request::old('shop_name') ?: '' }}" id="shop_name" name="shop_name" class="form-control col-md-7 col-xs-12" required = "required">
@@ -35,7 +35,7 @@
 							</div>
 
 							<div class="form-group{{ $errors->has('shop_code') ? ' has-error' : '' }}">
-								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="shop_code">Shop Code <span class="required">*</span>
+								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="shop_code">Shop Code <span class="required"><span style="color:red;">*</span></span>
 								</label>
 								<div class="col-md-6 col-sm-6 col-xs-12">
 									<input type="text" value="{{ Request::old('shop_code') ?: '' }}" id="shop_code" name="shop_code" class="form-control col-md-7 col-xs-12" required = "required">
@@ -46,7 +46,7 @@
 							</div>
 
 							<div class="form-group{{ $errors->has('shop_manager_name') ? ' has-error' : '' }}">
-								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="shop_manager_name">Shop Manager Name <span class="required">*</span>
+								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="shop_manager_name">Shop Manager Name <span class="required"><span style="color:red;">*</span></span>
 								</label>
 								<div class="col-md-6 col-sm-6 col-xs-12">
 									<input type="text" value="{{ Request::old('shop_manager_name') ?: '' }}" id="shop_manager_name" name="shop_manager_name" class="form-control col-md-7 col-xs-12" required = "required">
@@ -57,7 +57,7 @@
 							</div>
 
 							<div class="form-group{{ $errors->has('shop_contact') ? ' has-error' : '' }}">
-								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="shop_manager_name">Shop Contact <span class="required">*</span>
+								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="shop_manager_name">Shop Contact <span class="required"><span style="color:red;">*</span></span>
 								</label>
 								<div class="col-md-6 col-sm-6 col-xs-12">
 									<input type="text" value="{{ Request::old('shop_contact') ?: '' }}" id="shop_contact" name="shop_contact" class="form-control col-md-7 col-xs-12" required = "required" ng-pattern="/^(?:\+88|01)?(?:\d{11}|\d{13})$/">
@@ -68,7 +68,7 @@
 							</div>
 
 							<div class="form-group{{ $errors->has('address') ? ' has-error' : '' }}">
-								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="description">Address<span class="required">*</span>
+								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="description">Address<span class="required"><span style="color:red;">*</span></span>
 								</label>
 								<div class="col-md-6 col-sm-6 col-xs-12">
 									<input type="text" value="{{ Request::old('address') ?: '' }}" id="address" name="address" class="form-control col-md-7 col-xs-12" required = "required">

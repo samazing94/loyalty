@@ -24,7 +24,7 @@
 						<form method="POST" action="{{ url('customer/create') }}" data-parsley-validate class="form-horizontal form-label-left">
 
 							<div class="form-group{{ $errors->has('mobile_number') ? ' has-error' : '' }}">
-								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="mobile_number">Mobile No. <span class="required">*</span>
+								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="mobile_number">Mobile No. <span class="required"><span style="color:red;">*</span></span>
 								</label> 
 								<div class="col-md-6 col-sm-6 col-xs-12">
 									<input type="text" value="{{ Request::old('mobile_number') ?: '' }}" id="mobile_number" name="mobile_number" class="form-control col-md-7 col-xs-12" ng-pattern="/^(?:\+?88)?01[15-9]\d{8}$/" required>
@@ -35,7 +35,7 @@
 							</div>
 
 							<div class="form-group{{ $errors->has('firstname') ? ' has-error' : '' }}">
-								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="firstname">First Name <span class="required">*</span>
+								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="firstname">First Name <span class="required"><span style="color:red;">*</span></span>
 								</label>
 								<div class="col-md-6 col-sm-6 col-xs-12">
 									<input type="text" value="{{ Request::old('firstname') ?: '' }}" id="firstname" name="firstname" class="form-control col-md-7 col-xs-12" required="required">
@@ -58,7 +58,7 @@
 							</div>
 
 							<div class="form-group{{ $errors->has('dob') ? ' has-error' : '' }}">
-								<label for="dob" class="control-label col-md-3 col-sm-3 col-xs-12">Date of Birth</label> 
+								<label for="dob" class="control-label col-md-3 col-sm-3 col-xs-12">Date of Birth</label><span style="color:red;">*</span>
 								<div class="col-md-6 col-sm-6 col-xs-12">
 									<input id="dob" type="text" name="dob" value="" required="required" class="form-control" placeholder="MMYY">
 
@@ -66,7 +66,7 @@
 							</div>
 
 							<div class="form-group{{ $errors->has('profession') ? ' has-error' : '' }}">
-								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="description">Profession<span class="required">*</span>
+								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="description">Profession<span class="required"><span style="color:red;">*</span></span>
 								</label>
 								<div class="col-md-6 col-sm-6 col-xs-12">
 									<input type="text" value="{{ Request::old('profession') ?: '' }}" id="profession" name="profession" class="form-control col-md-7 col-xs-12" required="required">
@@ -78,7 +78,7 @@
 
 
 							<div class="form-group{{ $errors->has('location') ? ' has-error' : '' }}">
-								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="location">Location<span class="required">*</span>
+								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="location">Location<span class="required"><span style="color:red;">*</span></span>
 								</label>
 								<div class="col-md-6 col-sm-6 col-xs-12">
 									<input type="text" value="{{ Request::old('location') ?: '' }}" id="location" name="location" class="form-control col-md-7 col-xs-12" required="required">

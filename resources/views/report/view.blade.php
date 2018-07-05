@@ -1,5 +1,4 @@
 @extends('layouts.dashboard')
-
 @section('section')
 <div class="container">
 		<h2> Details </h2>

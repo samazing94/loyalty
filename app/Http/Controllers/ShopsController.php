@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Redirect;
 use Carbon\Carbon;
+use Auth;
 use App\ShopInfo;
 use Session;
 use DB;
@@ -30,6 +31,27 @@ class ShopsController extends Controller
     public function fail()
     {
     	return view('shop.fail');
+    }
+
+    public function offer_list(Request $request)
+    {
+        $userSession = Auth::user()->id;
+        $shops = DB::table('shops_info')->select('shop_info.id', 'shop_info.shop_name')
+        ->leftJoin('merchant_shop', 'merchant_shop.shop_id', '=', 'shop_info.id')
+        ->where('merchant_shop.user_id',  $userSession);
+        // ->leftJoin('merchant_shop', 'merchant_shop.merchant_id', '=', 'point_rule.merchant_id')
+        // ->leftJoin('shop_user', 'shop_user.shop_id', '=', 'shop_user.user_id')->where('shop_user.user_id', $userSession)->first();
+
+        // $offers = DB::table('point_rule')->select('point_rule.name','point_rule.offer_start', 'point_rule.offer_end', 'point_rule.merchant_id')
+        // ->leftJoin('merchant_shop', 'merchant_shop.merchant_id', '=', 'point_rule.merchant_id')
+        // ->where('merchant_shop.shop_id', $shop->id)->first();
+        
+        // $shops = DB::table('shops_')->select('point_rule.name','point_rule.offer_start', 'point_rule.offer_end', 'point_rule.merchant_id')
+        // ->leftJoin('merchant_shop', 'merchant_shop.merchant_id', '=', 'point_rule.merchant_id')
+        // ->leftJoin('shop_user', 'shop_user.shop_id', '=', 'shop_user.user_id')->where('shop_user.user_id', $userSession)->first();
+
+        dd($shops);
+        return view('shop/shoplist', compact('shops'));
     }
 
     public function store(Request $request)

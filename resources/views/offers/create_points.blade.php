@@ -1,5 +1,5 @@
 @extends('layouts.dashboard')
-@section('page_heading','Create Offers')
+@section('page_heading','Create Point Redeemers')
 @section('section')
 	<div class="">
 		<div class = "container">
@@ -16,7 +16,7 @@
 					</div>
 					<div class="x_content">
 						<br />
-						<form method="post" action="{{ url('offerlist/success') }}" data-parsley-validate class="form-horizontal form-label-left">
+						<form method="post" action="{{ url('offerlist/successpt') }}" data-parsley-validate class="form-horizontal form-label-left">
 
 							<div class="form-group">
 								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Name <span class="required"><span style="color:red;">*</span></span>
@@ -40,24 +40,24 @@
 								</div>
 							</div>
 
-							<div class="form-group{{ $errors->has('min_amount') ? ' has-error' : '' }}">
-								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="min_amount">Min. Amount <span class="required"><span style="color:red;">*</span></span>
+							<div class="form-group{{ $errors->has('min_point') ? ' has-error' : '' }}">
+								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="min_point">Min. Points <span class="required"><span style="color:red;">*</span></span>
 								</label>
 								<div class="col-md-6 col-sm-6 col-xs-12">
-									<input type="text" value="{{ Request::old('min_amount') ?: '' }}" id="min_amount" name="min_amount" class="form-control col-md-7 col-xs-12" required = "required">
-									@if ($errors->has('min_amount'))
-									<span class="help-block">{{ $errors->first('min_amount') }}</span>
+									<input type="text" value="{{ Request::old('min_point') ?: '' }}" id="min_point" name="min_point" class="form-control col-md-7 col-xs-12" required = "required">
+									@if ($errors->has('min_point'))
+									<span class="help-block">{{ $errors->first('min_point') }}</span>
 									@endif
 								</div>
 							</div>
 
-							<div class="form-group{{ $errors->has('point') ? ' has-error' : '' }}">
-								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="description">Point<span class="required"><span style="color:red;">*</span></span>
+							<div class="form-group{{ $errors->has('amount') ? ' has-error' : '' }}">
+								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="description">Amount<span class="required"><span style="color:red;">*</span></span>
 								</label>
 								<div class="col-md-6 col-sm-6 col-xs-12">
-									<input type="number" value="{{ Request::old('point') ?: '' }}" id="point" name="point" class="form-control col-md-7 col-xs-12" required = "required">
-									@if ($errors->has('point'))
-									<span class="help-block">{{ $errors->first('point') }}</span>
+									<input type="number" value="{{ Request::old('amount') ?: '' }}" id="amount" name="amount" class="form-control col-md-7 col-xs-12" required = "required">
+									@if ($errors->has('amount'))
+									<span class="help-block">{{ $errors->first('amount') }}</span>
 									@endif
 								</div>
 							</div>

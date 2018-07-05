@@ -16,7 +16,7 @@
 					</div>
 					<div class="x_content">
 						<br />
-						<form method="post" onsubmit = "tosubmit()" action="{{ url('offerlist/calculate') }}" data-parsley-validate class="form-horizontal form-label-left">
+						<form method="post" onsubmit = "tosubmit()" action="{{ url('offerlist/redeem_calculate') }}" data-parsley-validate class="form-horizontal form-label-left">
 							<div class ="form-group">
 								<label  class="control-label col-md-3 col-sm-3 col-xs-12" for="sel1">Select restaurant list:</label>
 								<div class="col-md-6 col-sm-6 col-xs-12">
@@ -61,24 +61,16 @@
 								</div>
 							</div>
 
-							<div class="form-group{{ $errors->has('amount') ? ' has-error' : '' }}">
-								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="amount">Amount <span class="required"><span style="color:red;">*</span></span>
+							<div class="form-group{{ $errors->has('redeem_points') ? ' has-error' : '' }}">
+								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="redeem_points">Points to Use <span class="required"><span style="color:red;">*</span></span>
 								</label>
 								<div class="col-md-6 col-sm-6 col-xs-12">
-									<input type="number" value="" id="amount" name="amount" class="form-control col-md-7 col-xs-12">
-									@if ($errors->has('amount'))
-									<span class="help-block">{{ $errors->first('amount') }}</span>
+									<input type="number" value="" id="redeem_points" name="redeem_points" class="form-control col-md-7 col-xs-12">
+									@if ($errors->has('redeem_points'))
+									<span class="help-block">{{ $errors->first('redeem_points') }}</span>
 									@endif
 								</div>
-							</div>
-
-							<div class="form-group">
-								<label class="control-label col-md-6 col-sm-6 col-xs-12" for="details">Details will be displayed here</label><div id="details"></div>
-							</div>
-							<div class="ln_solid"></div>
-							<div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-								<input type="hidden" name="_token" value="{{ Session::token() }}">
-								<button type="button" class="btn btn-success" onchange="showDetails(this.#details)">Submit</button>
+							</div>		
 							</div>
 						</form>
 					</div>
@@ -87,27 +79,3 @@
 		</div>
 	</div>
 @endsection
-@section('scripts')
-<script>
-	function showDetails(str) {
-    if (str == "") {
-        document.getElementById("txtHint").innerHTML = "";
-        return;
-    } else { 
-        if (window.XMLHttpRequest) {
-            // code for IE7+, Firefox, Chrome, Opera, Safari
-            xmlhttp = new XMLHttpRequest();
-        } else {
-            // code for IE6, IE5
-            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-        }
-        xmlhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-                document.getElementById("txtHint").innerHTML = this.responseText;
-            }
-        };
-        xmlhttp.open("GET","getuser.php?q="+str,true);
-        xmlhttp.send();
-    }
-}
-</script>

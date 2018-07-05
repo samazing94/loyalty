@@ -36,9 +36,10 @@ class ReportController extends Controller
 
 	public function cst_report($cst_id)
 	{
+
+		//return view('/report/view', compact('customer'));
+
 		$customer = \App\Customer::leftJoin('shop_redeemed', 'customerinfo.id', '=', 'shop_redeemed.customerinfo_id')->select('customerinfo.id', 'customerinfo.mobile_number', 'customerinfo.first_name', 'customerinfo.last_name', 'customerinfo.dob', 'customerinfo.profession', 'customerinfo.location', 'shop_redeemed.point', 'shop_redeemed.total_amount')->where('customerinfo_id', $cst_id)->get();
-		// print_r($customer);	
-		exit;
 		if($customer)
 			return view('/report/view', compact('customer'));
 		else
