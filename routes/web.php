@@ -52,7 +52,8 @@ Route::get('offerlist', 'PointsController@index');
 Route::get('offerlist/redeem', 'PointsController@redeem');
 Route::get('offerlist/create_points', 'PointsController@createRedeem');
 Route::get('offerlist/register', 'PointsController@create');
-Route::get('offerlist/create_points', 'PointsController@createPoints');
+Route::get('/offerlist/create_points', 'PointsController@createPoints');
+Route::get('/process', 'PointsController@process_order');
 
 
 //Route::post('/offerlist/create', 'PointsController@store');
