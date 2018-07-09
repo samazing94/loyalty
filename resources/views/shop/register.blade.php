@@ -38,7 +38,7 @@
 								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="shop_code">Shop Code <span class="required"><span style="color:red;">*</span></span>
 								</label>
 								<div class="col-md-6 col-sm-6 col-xs-12">
-									<input type="text" value="{{ Request::old('shop_code') ?: '' }}" id="shop_code" name="shop_code" class="form-control col-md-7 col-xs-12" required = "required">
+									<input type="text" value="{{ Request::old('shop_code') ?: '' }}" id="shop_code" name="shop_code" class="form-control col-md-7 col-xs-12" required = "required"  placeholder="Please keep within 3 characters only" >
 									@if ($errors->has('shop_code'))
 									<span class="help-block">{{ $errors->first('shop_code') }}</span>
 									@endif
@@ -60,7 +60,7 @@
 								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="shop_manager_name">Shop Contact <span class="required"><span style="color:red;">*</span></span>
 								</label>
 								<div class="col-md-6 col-sm-6 col-xs-12">
-									<input type="text" value="{{ Request::old('shop_contact') ?: '' }}" id="shop_contact" name="shop_contact" class="form-control col-md-7 col-xs-12" required = "required" ng-pattern="/^(?:\+88|01)?(?:\d{11}|\d{13})$/">
+									<input type="text" value="{{ Request::old('shop_contact') ?: '' }}" id="shop_contact" name="shop_contact" class="form-control col-md-7 col-xs-12" required = "required" ng-pattern="/^(?:\+88|01)?(?:\d{11}|\d{13})$/" placeholder = "880XXXXXXXXXX">
 									@if ($errors->has('shop_contact'))
 									<span class="help-block">{{ $errors->first('shop_contact') }}</span>
 									@endif

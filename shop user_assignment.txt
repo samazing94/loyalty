@@ -29,3 +29,20 @@ get rid of merchant id in front views
 fix dashboard -> provide whole view folder tomorrow after fix
 get merchant id auth running
 make required "*" red
+
+
+
+drop down menu has selections of merchant's appointed restaurants
+thru those appointed restaurants he gets offers
+
+
+point redeem rule
+
+same fields in point rule
+
+just change min_amount to min_point
+
+customers entiteld to shop
+total amount revenue from that shop assigned
+total orders from the assigned shops
+todays orders

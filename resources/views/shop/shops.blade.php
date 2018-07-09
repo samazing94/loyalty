@@ -190,7 +190,6 @@
 				'shop_manager_name': $('#shop_manager_name').val(),
 				'shop_contact': $('#shop_contact').val(),
 				'address': $('#address').val(),
-
 			},
 			success: function(response) {
 				$('.shop' + response.id).find('.shop_name').html(response.shop_name);
@@ -198,7 +197,9 @@
 				$('.shop' + response.id).find('.shop_manager_name').text(response.shop_manager_name);
 				$('.shop' + response.id).find('.shop_contact').text(response.shop_contact);
 				$('.shop' + response.id).find('.address').text(response.address);
+				//$('#table').DataTable().ajax.reload();
 			}
+			
 		});
 	});
 
@@ -218,7 +219,7 @@
 			}
 		});
 	});
-
+	
 	function fillmodaluser(details){
 		$('#fid').val(details[0]);
 		$('#shop_name').val(details[1]);

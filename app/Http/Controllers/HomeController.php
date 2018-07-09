@@ -48,12 +48,12 @@ class HomeController extends Controller
         ->leftJoin('shop_user', 'shop_user.shop_id', '=', 'shop_info.id')
         ->leftJoin('users', 'users.id', '=', 'shop_user.user_id')->where('shop_user.user_id', $userSession)->first();
 
+        $shop_user = DB::table('customerinfo')->select('*')->leftJoin('shop_user', 'shop_user.shop_id', '=', 'customerinfo.shop_id')->where('shop_user.user_id', $userSession)->get();
+        $customers_of_shop = count($shop_user);
+       // dd($customers_of_shop)
         //check if user is part of merchant
-        if ($user)
-        {
-            return view('home', compact('customers', 'smslog', 'pointoffer', 'c_off'));
-        }
-            return view('/customer/fail');
+     
+        return view('home', compact('customers_of_shop', 'smslog', 'pointoffer', 'c_off'));
     }
     // public function get_datatable()
     // {

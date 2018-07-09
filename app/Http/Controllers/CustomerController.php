@@ -40,6 +40,7 @@ class CustomerController extends Controller
 	}
 	public function store(Request $request)
 	{
+		$userSession = Auth::user()->id;
 		$mobile_number = $request->input('mobile_number');
 		$firstname = $request->input('firstname');
 		$lastname = $request->input('lastname');
@@ -57,7 +58,7 @@ class CustomerController extends Controller
 		$customer = DB::table('customerinfo')->where('mobile_number', $request->mobile_number)->first();
 		if (!$customer)
 		{
-			$rst = array('mobile_number' => $mobile_number, 'first_name' => $firstname, 'last_name' => $lastname, 'dob' => $dob, 'profession' => $profession, 'location' => $location);
+			$rst = array('mobile_number' => $mobile_number, 'first_name' => $firstname, 'last_name' => $lastname, 'dob' => $dob, 'profession' => $profession, 'location' => $location, 'shop_id' => $userSession);
 	
 			DB::table('customerinfo')->insert($rst);
 			

@@ -105,27 +105,39 @@ class PointsController extends Controller
   		$points = DB::table('point_rule')->where('id', $id)->whereRaw('SYSDATE() BETWEEN offer_start AND offer_end')->orderBy('id', 'desc')->first();
   		$mobile_number = $request->input('mobile_number');
   		$customer = DB::table('customerinfo')->where('mobile_number', $mobile_number)->first();
-  		$customerinfo = \App\Customer::leftJoin('shop_redeemed', 'shop_redeemed.id', '=', 'shop_redeemed.customerinfo_id')->select('customerinfo.id', 'customerinfo.mobile_number', 'customerinfo.first_name', 'customerinfo.last_name', 'customerinfo.dob', 'customerinfo.profession', 'customerinfo.location', DB::raw('SUM(shop_redeemed.point) as points'))->first();
-  		if ($points)
-		{
-			$min_amt = $points->min_amount; //gets min amount
-			$dec = ceil($amount/$points->min_amount); //amount/min amount to get initial set of points
-			$saved_amount = ($customerinfo->points / $dec) * $points->point; //calculte customer's accumulated points divided by dec with offer's base points
-			$pointamt = $amount; //store amount in a separate var to avoid overwriting
-
-			$radio = $request->get('radion_button', 0);
-				if($radio == 'yes')
-				{
-					$pointamt = $amount - $saved_amount;
-			  	}
-				else
-				{
-					$pointamt = $amount - 0;
-				} 
-
-			DB::table('point_rule_redeem')->insert(['id' => $points->id, 'name' => $points->name, 'description' => 
-					$points->description, 'min_point' => $points->point, 'amount' => $pointamt, 'offer_start' => $points->offer_start, 'offer_end' => $points->offer_end, 'merchant_id' => $userSession]);
-
+		if(!($customer)) {
+			$pointarr = array(	
+				"name" => NULL,
+				"mobile_number" => 0,
+				"points" => 0,
+				"amount" => 0,
+				"saved_amount" => 0,
+			);
+			echo json_encode($pointarr);
+		}
+		else
+		{	
+			$point_redeem = DB::table('point_rule_redeem')->whereRaw('SYSDATE() BETWEEN offer_start AND offer_end')->orderBy('id', 'desc')->first();
+			$min_point = $point_redeem->min_point;
+			$min_amount = $point_redeem->amount;
+			
+			//$customerinfo = \App\Customer::leftJoin('shop_redeemed', 'shop_redeemed.id', '=', 'shop_redeemed.customerinfo_id')->select('customerinfo.id', 'customerinfo.mobile_number', 'customerinfo.first_name', 'customerinfo.last_name', 'customerinfo.dob', 'customerinfo.profession', 'customerinfo.location', DB::raw('SUM(shop_redeemed.point) as points'))->first();
+			$customerinfo = DB::table('shop_redeemed')->select('*', DB::raw('SUM(shop_redeemed.point) as points'))->where('shop_redeemed.customerinfo_id', $customer->id)->first();
+			$saved_amount = ceil($min_amount/$min_point)*$customerinfo->points;  
+			// $pointamt = NULL; 
+			// $radio = $request->input('radion_button');
+			// if($radio == 'no')
+			// {
+				/*$pointamt = $amount - 0;
+				DB::table('point_rule_redeem')->insert(['id' => $points->id, 'name' => $points->name, 'description' => 
+				$points->description, 'min_point' => $points->point, 'amount' => $pointamt, 'offer_start' => $points->offer_start, 'offer_end' => $points->offer_end, 'merchant_id' => $userSession]);*/ 
+			// }
+			// else
+			// {
+			// 	$pointamt = $amount - $saved_amount;
+			// 	DB::table('point_rule_redeem')->insert(['id' => $points->id, 'name' => $points->name, 'description' => 
+			// 	$points->description, 'min_point' => $points->point, 'amount' => $pointamt, 'offer_start' => $points->offer_start, 'offer_end' => $points->offer_end, 'merchant_id' => $userSession]);
+			// } 
 			$pointarr = array(	
    				"name" => $points->name,
    				"mobile_number" => $customer->mobile_number,
@@ -138,17 +150,26 @@ class PointsController extends Controller
   	}
 	public function calculate(Request $request)
 	{
+		// $point_redeem = DB::table('point_rule_redeem')->whereRaw('SYSDATE() BETWEEN offer_start AND offer_end')->orderBy('id', 'desc')->first();
+		
+		//$customerinfo = \App\Customer::leftJoin('shop_redeemed', 'shop_redeemed.id', '=', 'shop_redeemed.customerinfo_id')->select('customerinfo.id', 'customerinfo.mobile_number', 'customerinfo.first_name', 'customerinfo.last_name', 'customerinfo.dob', 'customerinfo.profession', 'customerinfo.location', DB::raw('SUM(shop_redeemed.point) as points'))->first();
+		
+		
 		//point rule and customer
 		$amount = $request->input('amount');
 		$id = $request->input('name1');
 		$mobile_number = $request->input('mobile_number');
 		//customerinfo
 		$customers = DB::table('customerinfo')->where('mobile_number', $mobile_number)->first();
+		$customerinfo = DB::table('shop_redeemed')->select('*', DB::raw('SUM(shop_redeemed.point) as points'))->where('shop_redeemed.customerinfo_id', $customers->id)->first();
 		$userSession = Auth::user()->id;
 		//point_rule
 
 		$points = DB::table('point_rule')->where('id', $id)->whereRaw('SYSDATE() BETWEEN offer_start AND offer_end')->first();
-		
+		$min_point = $points->point;
+		$min_amount = $points->min_amount;
+		$saved_amount = ceil($min_amount/$min_point)*$customerinfo->points;  
+
 		if ($points->min_amount != NULL)
 		{
 			$dec = ceil($amount/$points->min_amount);
@@ -169,19 +190,20 @@ class PointsController extends Controller
 			}
 			else {	
 				$cs_id = $customers->id;
-				$pointamt = $dec + $points->point;
-				$fields = Input::get('action');
+				$fields = $request->input('action');
 					if($fields == 'yes')
 					{
-						$amount = $amount - $pointamt;			 		
+						$newamount = $amount - $saved_amount; 		
+						if($amount < $saved_amount) 
+							$newamount = 0;
 				  	}
 					else
 					{
-						$amount = $amount - 0;
+						$newamount = $amount - 0;
 					} 
-
+					$pointamt = $dec * $points->point;
 				DB::table('shop_redeemed')->insert(['point_rule_id' => $points->id, 'shop_id' => $merchant->shop_id, 'customerinfo_id' => 
-					$customers->id, 'total_amount' => $amount, 'point' => $pointamt, 'updated_by' => $userSession]);
+					$customers->id, 'total_amount' => $newamount, 'point' => $pointamt, 'updated_by' => $userSession]);
 			}
 			
 			$redeemcst = DB::table('shop_redeemed')->where('customerinfo_id', $customers->id)->orderBy('id', 'desc')->first();

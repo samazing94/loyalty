@@ -10,7 +10,7 @@
                                     <i class="fa fa-comments fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">{{$customers}}</div>
+                                    <div class="huge">{{$customers_of_shop}}</div>
                                     <div>Total Customers</div>
                                 </div>
                             </div>

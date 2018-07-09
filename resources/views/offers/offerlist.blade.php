@@ -58,7 +58,10 @@
 									@if ($errors->has('customers'))
 									<span class="help-block">{{ $errors->first('customers') }}</span>
 									@endif
+									<br>
+									<p class="mobile_error" style="color:red;"></p>
 								</div>
+								
 							</div>
 
 							<div class="form-group{{ $errors->has('amount') ? ' has-error' : '' }}">
@@ -73,14 +76,14 @@
 
 							</div>
 
-								<label class="details" style="margin-left:21.3em;" class="control-label col-md-3 col-sm-3 col-xs-12" for="details">You have <span class="points">0</span> points which converts to <span class="saved_amount"> 0 </span> TK
-								</label><div id="details"></div>
+							<label class="details" style="margin-left:21.3em;" class="control-label col-md-3 col-sm-3 col-xs-12" for="details">You have <span class="points">0</span> points which converts to <span class="saved_amount"> 0 </span> TK
+							</label><div id="details"></div>
 							
 							<div class="form-group{{ $errors->has('amount') ? ' has-error' : '' }}">
 								<label class="control-label col-md-6 col-sm-6 col-xs-12" style="margin-left:-2.7em;" for="amount">Do you wish to use this points?</label>
 								<span class ="points_cst" value = "{{$point->point}}" hidden>{{$point->point}}</span>
 								<span class ="min_amount" value = "{{$point->min_amount}}" hidden>{{$point->min_amount}}</span>
-								<div class="col-md-5 col-sm-6 col-xs-12">
+								<div class="col-md-5 col-sm-6 col-xs-12 radiobutton">
 									<input type="radio" name="action" value="yes" required> Yes
   									<input type="radio" name="action" value="no" required> No<br>
   									<div id = "response"></div>
@@ -103,81 +106,38 @@
 @section('scripts')
 <script>
     $(document).ready(function () {
-    $('#amount').on('change', function() {
-            var amount=$(this).val();
-            var csrftoken = $("#csrf").val();
-            var name = $('#name1').val();
-            
-            var mobile_number = $('#mobile_number').val();
-                $.getJSON('{{ url('process') }}?amount='+amount+'&_token='+csrftoken+'&name='+name+'&mobile_number='+mobile_number, function (data) {
-                	//obj = jQuery.parseJSON(JSON.stringify(data));
-					var saved_amount;		
-					var points;
-					name = data.name;
-					points = data.points;
-					//amount = data.amount;
-					saved_amount = data.saved_amount;
-					//alert(data.name + " " + data.points + " " + data.amount);
-                	//$(".details .taka").html(amount);
-					$(".details .points").html(points);
-					$(".details .saved_amount").html(saved_amount);
-                });
-        });
-        
-  });   
-
-	// $(document).ready(function () {
-	// 	var points = $(".points_cst").text();
-	// 	var min_amount = $(".min_amount").text();
-	// 	var amount = $(this).val();
-	// 	var csrf = $("#csrf").val();
-	// 	$('input[name=amount]').change( function() {
+		$('#mobile_number').on('change', function() {
+			var amount=$('#amount').val();
+			var csrftoken = $("#csrf").val();
+			var name = $('#name1').val();
+			var mobile_number =  $("#mobile_number").val();
+			var pattern = /^(?:\+?88)?01[15-9]\d{8}$/;
+			if (!pattern.test(mobile_number)) {
+				$(".mobile_error").html("Customer number invalid");
+				$(".details .points").html("0");
+				$(".details .saved_amount").html("0");
+				return false;
+			}
+			else { $(".mobile_error").html(""); }
+			$.getJSON('{{ url('process') }}?amount='+amount+'&_token='+csrftoken+'&name='+name+'&mobile_number='+mobile_number, function (data) {
+				var saved_amount;		
+				var points;
+				name = data.name;
+				points = data.points;
+				saved_amount = data.saved_amount;
 			
-	// 		$.ajax({
-	// 			type: 'post',
-	// 			url: "{{ url('process') }}",
-	// 			data: 
-	// 			{
-	// 				'csrf' : csrf,
-	// 				'amount' : amount,
-					
-	// 			},
-	// 		});	
-			
-			// var taka   = $(this).val();
-			// var s_amount = amount / min_amount;
-			// var g_point = points * s_amount
-			// var saved  = s_amount * points;
-		
-			// $(".details .taka").html(amount);
-			// $(".details .points").html(s_amount);
-			// $(".details .saved").html(saved);
+				$(".details .points").html("0");
+				$(".details .saved_amount").html("0");
 
-		// show that something is loading
-        // $('#response').html("<b>Loading response...</b>");
-         
-        // /*
-        //  * 'post_receiver.php' - where you will pass the form data
-        //  * $(this).serialize() - to easily read form data
-        //  * function(data){... - data contains the response from post_receiver.php
-        //  */
-        // $.post('{{ url('post_receiver') }}', { Amount: amount }, function(data){
-        //      console.log(data);
-        //     // show the response
-        //     $('#response').html(data);
-        //     //alert(data);
-
-             
-        // }).fail(function() {
-         
-        //     // just in case posting your form failed
-        //     alert( "Posting failed." );
-             
-        // });
- 
-        // // to prevent refreshing the whole page page
-        // return false;
-	// 	});
-	// });
+				$(".details .points").html(points);
+				$(".details .saved_amount").html(saved_amount);
+				if (!data.mobile_number)
+				{
+					$(".mobile_error").html("Customer doesn't exist");
+				}
+				
+			});	
+		}); 
+  	}); 
 </script>
 @endsection

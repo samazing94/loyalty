@@ -2,7 +2,7 @@
 {
 	background-image: url("../img/background2.jpg");
 	width: 100%;
-	height: auto;
+	margin: auto;
 	background-repeat: no-repeat;
 	align-content: center;
 	background-color:#030303;
@@ -56,10 +56,6 @@ body
 {
 	/*color:#2a2b2b;*/
 	color:#ffffff;
-}
-.panel-body
-{
-
 }
 .panel-default>.panel-heading
 {

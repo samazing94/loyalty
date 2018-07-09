@@ -97,14 +97,9 @@
 										<a href="{{ url ('/offerlist/register') }}">Create Offer</a>
 									</li>
 									<li>
-										<a href="{{ url ('/offerlist/create_points') }}">Create Point Redeemers</a>
-									</li>
-									<li>
 										<a href="{{ url('/offerlist')}}">Process Point Orders</a>		
 									</li>
-									<li>
-										<a href="{{ url ('/offerlist/redeem') }}">Process Point Redeem</a>
-									</li>
+			
 									
 								</ul>
 								<!-- /.nav-second-level -->

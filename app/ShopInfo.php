@@ -10,7 +10,7 @@ class ShopInfo extends Model
    // public $timestamps = false;
     public $primaryKey = 'id';
     protected $fillable = [
-        'shop_name', 'shop_code', 'shop_manager_name', 'shop_contact', 'address', 'status', //'created_by', 'updated_by'
+        'shop_name', 'shop_code', 'shop_manager_name', 'shop_contact', 'address', 'status', //'created_by', 'updated_by',
         //'name',
     ];
 }
