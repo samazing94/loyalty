@@ -109,6 +109,10 @@
 				$sqlshop = "SELECT * FROM shop_info WHERE shop_code = '$subhotkey'";
 				$res = mysqli_query($conn, $sqlshop);
 				$r_count = mysqli_num_rows($res);
+				$res_row = mysqli_fetch_array($res);
+				//print_r($res_row);
+				$id = $res_row['id'];
+				//print_r($id);
 				//checks if subkey exist or not
 				if($r_count == 0)
 				{
@@ -127,7 +131,7 @@
 					$reply_body = "Thank you for registering, you got 100 points!";
 					
 					$sql2 = "INSERT INTO smslog (hotkey, subhotkey, msisdn, sms_body, status, reply_body ) VALUES ('$hotkey','$subhotkey','$msisdn', '$sms', $status, '$reply_body')";
-					$sql = "INSERT INTO customerinfo (mobile_number, first_name, last_name, dob, profession, location) VALUES ('$mobile_number', '$firstname', '$lastname', '$dob', '$profession','$location')";
+					$sql = "INSERT INTO customerinfo (mobile_number, first_name, last_name, dob, profession, location, shop_id) VALUES ('$mobile_number', '$firstname', '$lastname', '$dob', '$profession','$location', '$id')";
 					mysqli_query($conn, $sql);
 					mysqli_query($conn, $sql2);
 					echo $reply_body;

@@ -22,7 +22,22 @@
 					<div class="x_content">
 						<br />
 						<form method="POST" action="{{ url('customer/create') }}" data-parsley-validate class="form-horizontal form-label-left">
-
+							<div class ="form-group">
+								<label  class="control-label col-md-3 col-sm-3 col-xs-12" for="sel1">Select restaurant list:</label>
+								<div class="col-md-6 col-sm-6 col-xs-12">
+									<select class="form-control" id="name" name="name">
+										@foreach($shops as $shop)
+									    <option value= "{{$shop->id}}" >{{$shop->shop_name}}</option>
+									    @endforeach
+									</select>
+									<script type="text/javascript">
+						   					function setTextField(ddl) {
+						        				document.getElementById('name').value = ddl.options[ddl.selectedIndex].text;
+						    			}
+									</script>
+								</div>
+							</div>
+								
 							<div class="form-group{{ $errors->has('mobile_number') ? ' has-error' : '' }}">
 								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="mobile_number">Mobile No. <span class="required"><span style="color:red;">*</span></span>
 								</label> 

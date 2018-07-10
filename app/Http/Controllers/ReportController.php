@@ -9,6 +9,7 @@ use Carbon\Carbon;
 use App\Customer;
 use App\Reedem;
 use App\SMS;
+use Auth;
 use DB;
 use Session;
 
@@ -21,14 +22,23 @@ class ReportController extends Controller
 	}   
 	public function list2()
 	{
-		$customers = \App\Customer::leftJoin('shop_redeemed', 'customerinfo.id', '=', 'shop_redeemed.customerinfo_id')->select('customerinfo.id', 'customerinfo.mobile_number', 'customerinfo.first_name', 'customerinfo.last_name', 'customerinfo.dob', 'customerinfo.profession', 'customerinfo.location', DB::raw('SUM(shop_redeemed.point) as points'))->groupBy('customerinfo.mobile_number')->get();
+		$userSession = Auth::user()->id;
+		$customers = \App\Customer::leftJoin('shop_redeemed', 'shop_redeemed.customerinfo_id' , '=','customerinfo.id')
+		->leftJoin('shop_user', 'shop_user.shop_id', 'shop_redeemed.shop_id')
+		->select('customerinfo.id', 'customerinfo.mobile_number', 'customerinfo.first_name', 'customerinfo.last_name', 'customerinfo.dob', 'customerinfo.profession', 'customerinfo.location', DB::raw('SUM(shop_redeemed.point) as points'))
+		->where('shop_user.user_id', $userSession )
+		->groupBy('customerinfo.mobile_number')->get();
 		$title = "List of Customers";
 		return view('report.customer', compact('customers', 'title'));
 	}
 
 		public function smslist()
 	{
-		$smslog = \App\SMS::all();
+		$userSession = Auth::user()->id;
+		$smslog = DB::table('smslog')->select('smslog.id', 'smslog.hotkey', 'smslog.subhotkey', 'smslog.sms_body', 'smslog.reply_body', 'smslog.status', 'smslog.msisdn', 'smslog.created_at')
+        ->leftJoin('shop_info', 'shop_info.shop_code', '=', 'smslog.subhotkey')
+        ->leftJoin('shop_user', 'shop_user.shop_id', '=', 'shop_info.id')
+        ->where('shop_user.user_id', $userSession)->get();
 		$status = NULL;
 		$title = "SMS Logs";
 		return view('/report/sms', compact('smslog', 'title'));

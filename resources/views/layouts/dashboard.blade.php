@@ -88,7 +88,7 @@
 								<!-- Shop Point Management -->
 
 							<li>
-								<a href="#"><i class="fas fa-user-circle"></i> Shop Point Management<span class="fa arrow"></span></a>
+								<a href="#"><i class="fas fa-utensils"></i>  Shop Point Management<span class="fa arrow"></span></a>
 								<ul class="nav nav-second-level">
 									<li>
 										<a href="{{ url('/offerlist/list')}}">Point Offers</a>		
@@ -104,7 +104,21 @@
 								</ul>
 								<!-- /.nav-second-level -->
 							</li>
+							
+							<li>
+								<a href="#"><i class="fas fa-portrait"></i>  Orders<span class="fa arrow"></span></a>
+								<ul class="nav nav-second-level">
+									<li>
+										<a href="{{ url('/orders/total_order')}}">Order List</a>		
+									</li>
+									<li>
+										<a href="{{ url('/orders/new_list')}}">New Orders</a>		
+									</li>
 									
+								</ul>
+								<!-- /.nav-second-level -->
+							</li>
+
 						   	<!-- Report Management -->
 							<li>
 								<a href="#"><i class="fa fa-files-o fa-fw"></i> Report Management<span class="fa arrow"></span></a>

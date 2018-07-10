@@ -9,6 +9,7 @@ use DataTables;
 use Carbon\Carbon;
 use App\Customer;
 use Session;
+use Auth;
 use DB;
 
 class CustomerController extends Controller
@@ -17,7 +18,11 @@ class CustomerController extends Controller
 	public function index()
 	{
 		$title = 'Loyalty Customer';
-		$customers = \App\Customer::all();
+		//$customers = \App\Customer::all();
+		$userSession = Auth::user()->id;
+		$customers = DB::table('customerinfo')->select('*')->leftJoin('shop_user', 'shop_user.shop_id', '=', 'customerinfo.shop_id')
+		->where('shop_user.user_id', $userSession)->get();
+		//dd($customers);
 		return view('customer.index', compact('title', 'customers'));
 	}
 
@@ -36,7 +41,11 @@ class CustomerController extends Controller
 	public function create()
 	{
 		$title = 'Loyalty Sign Up';
-		return view('customer.register', compact('title'));
+		$userSession = Auth::user()->id;
+		$shops = DB::table('shop_info')->select('shop_info.id', 'shop_info.shop_name')
+        ->leftJoin('shop_user', 'shop_user.shop_id', '=', 'shop_info.id')
+        ->leftJoin('users', 'users.id', '=', 'shop_user.user_id')->where('shop_user.user_id', $userSession)->get();
+		return view('customer.register', compact('title', 'shops'));
 	}
 	public function store(Request $request)
 	{
@@ -47,6 +56,8 @@ class CustomerController extends Controller
 		$dob = $request->input('dob');
 		$profession = $request->input('profession');
 		$location = $request->input('location');	
+		$id = $request->input('name');
+		dd($id);
 		$this->validate(request(), [
    			 'mobile_number' => 
        		 array(
@@ -55,10 +66,11 @@ class CustomerController extends Controller
        	 	)
 		]);
 		//work on validation here;
+
 		$customer = DB::table('customerinfo')->where('mobile_number', $request->mobile_number)->first();
 		if (!$customer)
 		{
-			$rst = array('mobile_number' => $mobile_number, 'first_name' => $firstname, 'last_name' => $lastname, 'dob' => $dob, 'profession' => $profession, 'location' => $location, 'shop_id' => $userSession);
+			$rst = array('mobile_number' => $mobile_number, 'first_name' => $firstname, 'last_name' => $lastname, 'dob' => $dob, 'profession' => $profession, 'location' => $location, 'shop_id' => $id);
 	
 			DB::table('customerinfo')->insert($rst);
 			

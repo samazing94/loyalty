@@ -12,7 +12,7 @@
 */
 Route::get('/', function () {
     if(Auth::check()){
-        return redirect()->route('dashboard');
+        return redirect()->route('home');
     }
     return view('auth.login');
 })->name('login');
@@ -30,10 +30,10 @@ Route::group(['prefix' => 'shop', 'middleware' => 'auth'], function()
 	Route::get('/register', 'ShopsController@create');
 	//Route::get('/shoplist', 'ShopsController@offer_list');
 	//shop operations	
-	Route::post('shop/success', 'ShopsController@store');
-	Route::get('shop/fail', 'ShopsController@fail');
-	Route::post('shop/update', 'ShopsController@update');
-	Route::post('shop/delete', 'ShopsController@delete');
+	Route::post('/success', 'ShopsController@store');
+	Route::get('/fail', 'ShopsController@fail');
+	Route::post('/update', 'ShopsController@update');
+	Route::post('/delete', 'ShopsController@delete');
 
 });
 
@@ -45,7 +45,6 @@ Route::group(['prefix' => 'customer', 'middleware' => 'auth'], function()
 	Route::post('/create', 'CustomerController@store');
 	Route::post('/update', 'CustomerController@update');
 	Route::post('/delete', 'CustomerController@delete');
-
 });
 
 
@@ -68,6 +67,11 @@ Route::group(['prefix' => 'offerlist', 'middleware' => 'auth'], function(){
 	Route::get('/fail', 'PointsController@fail');
 	Route::post('/calculate', 'PointsController@calculate');
 
+});
+
+Route::group(['prefix' => 'orders', 'middleware' => 'auth'], function(){
+	Route::get('/total_order', 'PointsController@total_orders');
+	Route::get('/new_list', 'PointsController@view_new');
 });
 
 Route::middleware(['auth'])->group(function () {

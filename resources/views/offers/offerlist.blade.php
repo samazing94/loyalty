@@ -81,8 +81,6 @@
 							
 							<div class="form-group{{ $errors->has('amount') ? ' has-error' : '' }}">
 								<label class="control-label col-md-6 col-sm-6 col-xs-12" style="margin-left:-2.7em;" for="amount">Do you wish to use this points?</label>
-								<span class ="points_cst" value = "{{$point->point}}" hidden>{{$point->point}}</span>
-								<span class ="min_amount" value = "{{$point->min_amount}}" hidden>{{$point->min_amount}}</span>
 								<div class="col-md-5 col-sm-6 col-xs-12 radiobutton">
 									<input type="radio" name="action" value="yes" required> Yes
   									<input type="radio" name="action" value="no" required> No<br>

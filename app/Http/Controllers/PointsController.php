@@ -20,9 +20,40 @@ use Session;
 class PointsController extends Controller
 {
 	
+	///order section
+	public function view_new()
+	{
+		//$orders = Point::all();
+		$userSession = Auth::user()->id;
+		//$merchantuser = DB::table('merchants_user')->select('*')->where('userId', $userSession)->first();
+		// $newoffers = DB::table('shop_redeemed')->where('merchant_id', $merchantuser->merchantsId)->whereDate('created_at', [Carbon::now()->format('Y-m-d H:i:s')])->get();
+		$newoffers = DB::table('shop_redeemed')->select('*')
+        ->leftJoin('shop_user', 'shop_user.shop_id', '=', 'shop_redeemed.shop_id')
+        ->leftJoin('shop_info', 'shop_info.id', '=', 'shop_user.shop_id')
+        ->where('shop_user.user_id', $userSession)
+        ->whereDate('shop_redeemed.created_at', Carbon::today()->toDateString())->get();
+        
+		return view('orders.new_list', compact('newoffers'));
+	}
+
+	public function total_orders()
+	{
+		$userSession = Auth::user()->id;
+		$total_orders = DB::table('shop_redeemed')->select('*', DB::raw('COUNT(shop_redeemed.customerinfo_id) as total_cst'))
+        ->leftJoin('shop_user', 'shop_user.shop_id', '=', 'shop_redeemed.shop_id')
+        ->leftJoin('shop_info', 'shop_info.id', '=', 'shop_user.shop_id')
+        ->where('shop_user.user_id', $userSession)
+        ->groupBy('shop_redeemed.shop_id')
+        ->get();
+		return view('orders.total_order', compact('total_orders'));
+	}
+
+	//offers
 	public function view()
 	{
-		$orders = Point::all();
+		$userSession = Auth::user()->id;
+		$merchantuser = DB::table('merchants_user')->select('*')->where('userId', $userSession)->first();
+		$orders = Point::where('merchant_id', $merchantuser->merchantsId)->get();
 		return view('offers.list', compact('orders'));
 	}
 
@@ -33,8 +64,10 @@ class PointsController extends Controller
 		$shops = DB::table('shop_info')->select('shop_info.id', 'shop_info.shop_name')
         ->leftJoin('shop_user', 'shop_user.shop_id', '=', 'shop_info.id')
         ->leftJoin('users', 'users.id', '=', 'shop_user.user_id')->where('shop_user.user_id', $userSession)->get();
-        $points = DB::table('point_rule')->select('*')
-        ->where('point_rule.merchant_id', $userSession)->get();
+		$merchantuser = DB::table('merchants_user')->select('*')->where('userId', $userSession)->first();
+		$points = DB::table('point_rule')->select('*')
+		->where('point_rule.merchant_id', $merchantuser->merchantsId)->get();
+		//dd($points);
 		 //$point_x = $points->point;
 		 //dd($point_x);
 		return view('offers.offerlist', compact('customers', 'points', 'shops'));
@@ -84,18 +117,18 @@ class PointsController extends Controller
 		return Redirect::back();
   	}
 
-  	public function redeem()
-  	{
-  		$userSession = Auth::user()->id;
-		$customers = Customer::all();
-		$shops = DB::table('shop_info')->select('shop_info.id', 'shop_info.shop_name')
-        ->leftJoin('shop_user', 'shop_user.shop_id', '=', 'shop_info.id')
-        ->leftJoin('users', 'users.id', '=', 'shop_user.user_id')->where('shop_user.user_id', $userSession)->get();
-        $points = DB::table('point_rule_redeem')->select('*')
-        ->where('point_rule_redeem.merchant_id', $userSession)->get();
+  // 	public function redeem()
+  // 	{
+  // 		$userSession = Auth::user()->id;
+		// $customers = Customer::all();
+		// $shops = DB::table('shop_info')->select('shop_info.id', 'shop_info.shop_name')
+  //       ->leftJoin('shop_user', 'shop_user.shop_id', '=', 'shop_info.id')
+  //       ->leftJoin('users', 'users.id', '=', 'shop_user.user_id')->where('shop_user.user_id', $userSession)->get();
+  //       $points = DB::table('point_rule_redeem')->select('*')
+  //       ->where('point_rule_redeem.merchant_id', $userSession)->get();
 
-		return view('offers.redeemprocess', compact('customers', 'points', 'shops'));
-  	}
+		// return view('offers.redeemprocess', compact('customers', 'points', 'shops'));
+  // 	}
 
   	public function process_order(Request $request)
   	{
@@ -124,20 +157,7 @@ class PointsController extends Controller
 			//$customerinfo = \App\Customer::leftJoin('shop_redeemed', 'shop_redeemed.id', '=', 'shop_redeemed.customerinfo_id')->select('customerinfo.id', 'customerinfo.mobile_number', 'customerinfo.first_name', 'customerinfo.last_name', 'customerinfo.dob', 'customerinfo.profession', 'customerinfo.location', DB::raw('SUM(shop_redeemed.point) as points'))->first();
 			$customerinfo = DB::table('shop_redeemed')->select('*', DB::raw('SUM(shop_redeemed.point) as points'))->where('shop_redeemed.customerinfo_id', $customer->id)->first();
 			$saved_amount = ceil($min_amount/$min_point)*$customerinfo->points;  
-			// $pointamt = NULL; 
-			// $radio = $request->input('radion_button');
-			// if($radio == 'no')
-			// {
-				/*$pointamt = $amount - 0;
-				DB::table('point_rule_redeem')->insert(['id' => $points->id, 'name' => $points->name, 'description' => 
-				$points->description, 'min_point' => $points->point, 'amount' => $pointamt, 'offer_start' => $points->offer_start, 'offer_end' => $points->offer_end, 'merchant_id' => $userSession]);*/ 
-			// }
-			// else
-			// {
-			// 	$pointamt = $amount - $saved_amount;
-			// 	DB::table('point_rule_redeem')->insert(['id' => $points->id, 'name' => $points->name, 'description' => 
-			// 	$points->description, 'min_point' => $points->point, 'amount' => $pointamt, 'offer_start' => $points->offer_start, 'offer_end' => $points->offer_end, 'merchant_id' => $userSession]);
-			// } 
+
 			$pointarr = array(	
    				"name" => $points->name,
    				"mobile_number" => $customer->mobile_number,
@@ -150,11 +170,7 @@ class PointsController extends Controller
   	}
 	public function calculate(Request $request)
 	{
-		// $point_redeem = DB::table('point_rule_redeem')->whereRaw('SYSDATE() BETWEEN offer_start AND offer_end')->orderBy('id', 'desc')->first();
-		
-		//$customerinfo = \App\Customer::leftJoin('shop_redeemed', 'shop_redeemed.id', '=', 'shop_redeemed.customerinfo_id')->select('customerinfo.id', 'customerinfo.mobile_number', 'customerinfo.first_name', 'customerinfo.last_name', 'customerinfo.dob', 'customerinfo.profession', 'customerinfo.location', DB::raw('SUM(shop_redeemed.point) as points'))->first();
-		
-		
+
 		//point rule and customer
 		$amount = $request->input('amount');
 		$id = $request->input('name1');
