@@ -101,7 +101,7 @@
 								</div>
 								<div class="col-xs-9 text-right">
 									<div class="huge">{{$c_off}}</div>
-									<div>New Offers</div>
+									<div>New Orders</div>
 								</div>
 							</div>
 						</div>

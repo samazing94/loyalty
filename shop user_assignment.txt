@@ -42,7 +42,7 @@ same fields in point rule
 
 just change min_amount to min_point
 
-customers entiteld to shop
-total amount revenue from that shop assigned
-total orders from the assigned shops
+customers entiteld to shop x
+total amount revenue from that shop assigned x
+total orders from the assigned shops 
 todays orders

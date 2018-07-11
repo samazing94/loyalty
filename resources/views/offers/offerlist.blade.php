@@ -46,9 +46,11 @@
 						        				document.getElementById('name1').value = ddl.options[ddl.selectedIndex].text;
 						    			}
 									</script>
+									<p class="offer_error" style="color:red;"></p>
 								</div>
-							</div>
 
+							</div>
+							
 							<div class="form-group">
 								
 								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="mobile_number">Phone No. <span class="required"><span style="color:red;">*</span></span>
@@ -68,10 +70,11 @@
 								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="amount">Amount <span class="required"><span style="color:red;">*</span></span>
 								</label>
 								<div class="col-md-6 col-sm-6 col-xs-12">
-									<input type="number" value="" id="amount" name="amount" class="form-control col-md-7 col-xs-12">
+									<input type="number" value="" id="amount" name="amount" class="form-control col-md-7 col-xs-12" required class="required">
 									@if ($errors->has('amount'))
 									<span class="help-block">{{ $errors->first('amount') }}</span>
 									@endif
+									
 								</div>
 
 							</div>
@@ -79,9 +82,10 @@
 							<label class="details" style="margin-left:21.3em;" class="control-label col-md-3 col-sm-3 col-xs-12" for="details">You have <span class="points">0</span> points which converts to <span class="saved_amount"> 0 </span> TK
 							</label><div id="details"></div>
 							
-							<div class="form-group{{ $errors->has('amount') ? ' has-error' : '' }}">
-								<label class="control-label col-md-6 col-sm-6 col-xs-12" style="margin-left:-2.7em;" for="amount">Do you wish to use this points?</label>
-								<div class="col-md-5 col-sm-6 col-xs-12 radiobutton">
+							
+							<div class="rd_button">
+								<label class="control-label col-md-6 col-sm-6 col-xs-12"  style="margin-left:-3.2em">Do you wish to use this points?</label>
+								<div class="col-md-5 col-sm-6 col-xs-12">
 									<input type="radio" name="action" value="yes" required> Yes
   									<input type="radio" name="action" value="no" required> No<br>
   									<div id = "response"></div>
@@ -90,6 +94,7 @@
 							</div>
 
 							<div class="ln_solid"></div>
+								<br>
 							<div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
 								<input id = "csrf" type="hidden" name="_token" value="{{ Session::token() }}">
 								<button type="submit" class="btn btn-success">Submit</button>
@@ -133,9 +138,27 @@
 				{
 					$(".mobile_error").html("Customer doesn't exist");
 				}
-				
-			});	
+				else if (data.status)
+				{
+					$(".offer_error").html(data.status);
+				}
+				else if (points==0)
+				{
+					 $(".rd_button").hide();
+					alert("New Customer");
+					
+				}
+			});
+		});
+		function startRefresh() {
+		    $.get('', function(data) {
+		        $(document.body).html(data);    
+		    });
+		}
+		$(function() {
+		    setTimeout(startRefresh,60000);
 		}); 
-  	}); 
+  	});
+
 </script>
 @endsection

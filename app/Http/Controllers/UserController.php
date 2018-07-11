@@ -18,7 +18,7 @@ class UserController extends Controller
 	public function userprofile(){
 
 		$user = User::all();
-		dd($user);
+		//dd($user);
 		return view('users/userprofile', compact('users'));
 	}
 

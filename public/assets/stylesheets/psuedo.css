@@ -2245,6 +2245,10 @@ caption {
   color: #777;
   text-align: left;
 }
+.radiobutton
+{
+  visibility:visible;
+}
 th {
   text-align: left;
 }

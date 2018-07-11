@@ -57,7 +57,6 @@ class CustomerController extends Controller
 		$profession = $request->input('profession');
 		$location = $request->input('location');	
 		$id = $request->input('name');
-		dd($id);
 		$this->validate(request(), [
    			 'mobile_number' => 
        		 array(
