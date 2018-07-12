@@ -6,7 +6,7 @@
 				<thead>
 					<tr>
 						<th class="text-center">Serial No.</th>
-						<th class="text-center">Customer ID</th>
+						<th class="text-center">Customer Name</th>
 						<th class="text-center">Shop Name</th>
 						<th class="text-center">Points Acquired</th>
 						<th class="text-center">Total Amount</th>
@@ -19,7 +19,7 @@
 				<tr class="newoffer{{$newoffer->id}}">
 					<td class="id">{{++$i}}</button></td>
 					<input type="hidden" id="fid" name="fid" value='{{$newoffer->id}}'>
-					<td class="cst_id">{{$newoffer->customerinfo_id}}</td>
+					<td class="cst_id">{{$newoffer->first_name}} {{$newoffer->last_name}}</td>
 					<td class="shop_id">{{$newoffer->shop_name}}</td>
 					<td class="point">{{$newoffer->point}}</td>
 					<td class="total_amount">{{$newoffer->total_amount}}</td>

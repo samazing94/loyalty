@@ -144,7 +144,7 @@
 				}
 				else if (points==0)
 				{
-					 $(".rd_button").hide();
+					 $(".rd_button").hide("");
 					alert("New Customer");
 					
 				}

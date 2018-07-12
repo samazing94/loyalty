@@ -37,7 +37,7 @@ class HomeController extends Controller
     public function index()
     {
         $userSession = Auth::user()->id;
-        
+        //$displayName = 
         $smslog = DB::table('smslog')->select('reply_body')
         ->leftJoin('shop_info', 'shop_info.shop_code', '=', 'smslog.subhotkey')
         ->leftJoin('shop_user', 'shop_user.shop_id', '=', 'shop_info.id')
@@ -76,7 +76,7 @@ class HomeController extends Controller
         ->groupBy('shop_redeemed.shop_id')
         ->get();
         $count_orders = count($total_orders);
-        return view('home', compact('customers_of_shop', 'count_smslog', 'count_pointoffer', 'c_off', 'revenue', 'count_orders'));
+        return view('home', compact('customers_of_shop', 'count_smslog', 'count_pointoffer', 'c_off', 'revenue', 'count_orders', 'userSession'));
     }
 
 }

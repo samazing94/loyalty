@@ -25,11 +25,11 @@ class PointsController extends Controller
 	{
 		//$orders = Point::all();
 		$userSession = Auth::user()->id;
-		//$merchantuser = DB::table('merchants_user')->select('*')->where('userId', $userSession)->first();
-		// $newoffers = DB::table('shop_redeemed')->where('merchant_id', $merchantuser->merchantsId)->whereDate('created_at', [Carbon::now()->format('Y-m-d H:i:s')])->get();
-		$newoffers = DB::table('shop_redeemed')->select('*' )
+	
+		$newoffers = DB::table('shop_redeemed')->select('*')
         ->leftJoin('shop_user', 'shop_user.shop_id', '=', 'shop_redeemed.shop_id')
         ->leftJoin('shop_info', 'shop_info.id', '=', 'shop_user.shop_id')
+        ->leftJoin('customerinfo', 'customerinfo.id', '=', 'shop_redeemed.customerinfo_id')
         ->where('shop_user.user_id', $userSession)
         ->whereDate('shop_redeemed.created_at', Carbon::now()->toDateString())->get();
         

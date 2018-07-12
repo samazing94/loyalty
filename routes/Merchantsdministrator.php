@@ -10,15 +10,17 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', function () {
-    if(Auth::check()){
+// Route::get('/', function () {
+//     if(Auth::check()){
        
-       return redirect()->route('home');
-    }
-    return view('auth.login');
-})->name('login');
+//        return redirect()->route('home');
+//     }
+//     return view('auth.login');
+// })->name('login');
 
 Auth::routes();
+
+
 
 Route::prefix('merchantsadministrator')->group(function () {
 	Route::get('/home', 'HomeController@index');
@@ -27,7 +29,7 @@ Route::prefix('merchantsadministrator')->group(function () {
 
 
 //shop list
-Route::group(['prefix' => 'shop', 'middleware' => 'auth'], function()
+Route::group(['prefix' => 'merchantsadministrator/shop', 'middleware' => 'auth'], function()
 {
 	Route::get('/', 'ShopsController@index');
 	Route::get('/register', 'ShopsController@create');
@@ -40,7 +42,7 @@ Route::group(['prefix' => 'shop', 'middleware' => 'auth'], function()
 
 });
 
-Route::group(['prefix' => 'customer', 'middleware' => 'auth'], function()
+Route::group(['prefix' => 'merchantsadministrator/customer', 'middleware' => 'auth'], function()
 {
 	Route::get('/index', 'CustomerController@index');
 	Route::get('/register', 'CustomerController@create');
@@ -57,7 +59,7 @@ Route::get('/pushpull', 'CustomerController@pushpull');
 //Route::get('/customer/success', 'CustomerController@success');
 
 //point mgt
-Route::group(['prefix' => 'offerlist', 'middleware' => 'auth'], function(){
+Route::group(['prefix' => 'merchantsadministrator/offerlist', 'middleware' => 'auth'], function(){
 	Route::get('/list', 'PointsController@view');
 	Route::get('/', 'PointsController@index');
 	Route::get('/register', 'PointsController@create');
@@ -72,7 +74,7 @@ Route::group(['prefix' => 'offerlist', 'middleware' => 'auth'], function(){
 
 });
 
-Route::group(['prefix' => 'orders', 'middleware' => 'auth'], function(){
+Route::group(['prefix' => 'merchantsadministrator/orders', 'middleware' => 'auth'], function(){
 	Route::get('/total_order', 'PointsController@total_orders');
 	Route::get('/new_list', 'PointsController@view_new');
 });
@@ -84,7 +86,7 @@ Route::middleware(['auth'])->group(function () {
 //
 
 //report
-Route::group(['prefix' => 'report', 'middleware' => 'auth'], function(){
+Route::group(['prefix' => 'merchantsadministrator/report', 'middleware' => 'auth'], function(){
 	Route::get('/','ReportController@index');
 	Route::get('/customer','ReportController@list2');
 	Route::get('/sms','ReportController@smslist');

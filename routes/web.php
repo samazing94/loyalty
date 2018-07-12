@@ -11,33 +11,38 @@
 |
 */
 Route::get('/', function () {
-    if(Auth::check()){
-    	$roles = \Auth::user()->roles;
+	if (Auth::check()) {
+
+        $roles = \Auth::user()->roles;
 
         if(!count($roles))
         {
-           return redirect()->route('login');
+            return view('auth.login');
         }
 
         $role = $roles->first()->name;
 
-        if($role == "Merchantsdministrator"){
-            return redirect()->route('merchantsdministrator.home');
+        if($role == "Merchantsadministrator"){
+            return redirect()->route('merchantsadministrator.home');
         }
         if($role == "shopmanager"){
             return redirect()->route('shopmanager.home');
         }
-        return redirect()->route('default-user.home');
-    }
-    return redirect()->route('login');
+	}
 });
 
+// Route::group(['prefix' => 'admin', 'middleware' => ['role:admin']], function() {
+//     Route::resource('roles','RoleController');
+//     Route::resource('users','UserController');
+// });
+
+//     if(Auth::check()){
 //         return redirect()->route('home');
 //     }
 //     return view('auth.login');
 // })->name('login');
 
-Auth::routes();
+// Auth::routes();
 
 // Route::get('/home', 'HomeController@index')->name('home');
 // Route::get('/userprofile', 'UserController@userprofile');

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 09, 2018 at 11:38 AM
+-- Generation Time: Jul 12, 2018 at 09:15 AM
 -- Server version: 10.1.32-MariaDB
 -- PHP Version: 7.2.5
 
@@ -36,6 +36,7 @@ CREATE TABLE `customerinfo` (
   `dob` varchar(255) DEFAULT NULL,
   `profession` varchar(255) DEFAULT NULL,
   `location` varchar(255) DEFAULT NULL,
+  `shop_id` int(10) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -44,16 +45,18 @@ CREATE TABLE `customerinfo` (
 -- Dumping data for table `customerinfo`
 --
 
-INSERT INTO `customerinfo` (`id`, `mobile_number`, `first_name`, `last_name`, `dob`, `profession`, `location`, `created_at`, `updated_at`) VALUES
-(2, '017234021', 'Sammy', 'Hossain', '0507', 'Student', 'Gulshan', '2018-06-27 07:02:57', '2018-07-01 03:35:54'),
-(11, '01752303178', 'Sammy', 'Hoss', '0794', 'Student', 'Gulshan 1', '2018-06-28 06:52:31', '2018-07-04 03:03:01'),
-(16, '01752303147', 'SAMY', 'HOSS', '0794', 'Student', 'Gulshan 2', '2018-06-28 10:03:08', '2018-07-01 03:36:31'),
-(18, '01683836911', 'Rick', 'Ban', '0509', 'Student', 'Mirpur', '2018-07-02 08:18:53', '2018-07-02 08:18:53'),
-(19, '01683836999', 'Rick', 'Ban', '0509', 'Student', 'Mirpur', '2018-07-03 08:41:23', '2018-07-03 08:41:23'),
-(21, '01683836929', 'Sam', 'Yaoi', '0507', 'Student', 'Banani', '2018-07-03 08:51:50', '2018-07-04 03:06:12'),
-(30, '01752303145', 'Samina', 'Hossain', '0507', 'Student', 'Gulshan 2', '2018-07-04 06:51:33', '2018-07-04 06:51:33'),
-(31, '01752303146', 'SAM', 'Hoss', '0507', 'Officer', 'Gulshan 2', '2018-07-04 07:18:12', '2018-07-04 07:18:12'),
-(32, '01752303155', 'SAM', 'Hossain', '0794', 'Student', 'Gulshan 2', '2018-07-04 07:20:26', '2018-07-04 07:20:26');
+INSERT INTO `customerinfo` (`id`, `mobile_number`, `first_name`, `last_name`, `dob`, `profession`, `location`, `shop_id`, `created_at`, `updated_at`) VALUES
+(2, '017234021', 'SaM', 'Hossain', '0507', 'Student', 'Gulshan', 30, '2018-06-27 07:02:57', '2018-07-10 05:22:19'),
+(11, '01752303178', 'Sam', 'Hoss', '0794', 'Student', 'Gulshan 1', 2, '2018-06-28 06:52:31', '2018-07-10 05:24:35'),
+(16, '01752303147', 'SAMY', 'HOSS', '0794', 'Student', 'Gulshan 2', 3, '2018-06-28 10:03:08', '2018-07-09 11:33:49'),
+(18, '01683836911', 'Rick', 'Ban', '0509', 'Student', 'Mirpur', 30, '2018-07-02 08:18:53', '2018-07-09 11:33:49'),
+(19, '01683836999', 'Rick', 'Ban', '0509', 'Student', 'Mirpur', 6, '2018-07-03 08:41:23', '2018-07-09 11:33:49'),
+(21, '01683836929', 'Sam', 'Yaoi', '0507', 'Student', 'Banani', 6, '2018-07-03 08:51:50', '2018-07-09 11:33:49'),
+(30, '01752303145', 'Samina', 'Hossain', '0507', 'Student', 'Gulshan 2', 30, '2018-07-04 06:51:33', '2018-07-09 11:33:49'),
+(31, '01752303146', 'SAM', 'Hoss', '0507', 'Officer', 'Gulshan 2', 3, '2018-07-04 07:18:12', '2018-07-09 11:33:49'),
+(32, '01752303155', 'SAM', 'Hossain', '0794', 'Student', 'Gulshan 2', 2, '2018-07-04 07:20:26', '2018-07-09 11:33:49'),
+(40, '01942340534', 'Waris', 'Parvez', '0193', 'Student', 'Uttara', 29, '2018-07-10 12:01:52', '2018-07-10 12:01:52'),
+(41, '01823423145', 'Riya', 'Ray', '0693', 'Student', 'Gulshan', 29, '2018-07-11 05:18:25', '2018-07-11 05:18:25');
 
 -- --------------------------------------------------------
 
@@ -410,11 +413,12 @@ CREATE TABLE `point_rule` (
 --
 
 INSERT INTO `point_rule` (`id`, `name`, `description`, `min_amount`, `point`, `offer_start`, `offer_end`, `merchant_id`, `created_at`, `updated_at`) VALUES
-(1, 'Loyal Pow', 'Point Season All You Can eat Buffet', 300, 16, '2018-07-04 09:45:23', '2019-03-31 18:00:00', 5, '2018-06-27 07:43:06', '2018-07-03 00:47:40'),
+(1, 'Loyal Pow', 'Point Season All You Can eat Buffet', 300, 16, '2018-07-10 04:34:18', '2019-03-31 18:00:00', 10, '2018-06-27 07:43:06', '2018-07-03 00:47:40'),
 (3, 'Buffet Fiesta', 'abc', 100, 1, '2018-07-04 09:45:15', '2018-07-23 18:00:00', 1, '2018-06-27 09:28:44', '2018-06-27 09:28:44'),
-(6, 'Umai', 'Unlimited Sushi', 700, 20, '2018-01-07 18:00:00', '2018-08-08 18:00:00', 5, '2018-07-04 06:32:18', '2018-07-04 06:32:18'),
-(7, 'Pizza Guy', 'Unlimited Pizza', 700, 20, '2018-06-08 18:00:00', '2018-09-08 18:00:00', 5, '2018-07-05 06:26:55', '2018-07-05 06:26:55'),
-(8, 'April 14th', 'Pohela Boishak offer', 400, 20, '2018-03-31 18:00:00', '2018-04-16 18:00:00', 5, '2018-07-05 08:15:06', '2018-07-05 08:15:06');
+(6, 'Umai', 'Unlimited Sushi', 700, 20, '2018-07-10 04:34:18', '2018-08-08 18:00:00', 10, '2018-07-04 06:32:18', '2018-07-04 06:32:18'),
+(7, 'Pizza Guy', 'Unlimited Pizza', 700, 20, '2018-07-10 04:34:18', '2018-09-08 18:00:00', 10, '2018-07-05 06:26:55', '2018-07-05 06:26:55'),
+(8, 'April 14th', 'Pohela Boishak offer', 400, 20, '2018-07-10 04:34:18', '2018-04-16 18:00:00', 10, '2018-07-05 08:15:06', '2018-07-05 08:15:06'),
+(9, 'Pizza Buy 1 Get 2', 'Pizza Guy Pizza Galore', 400, 20, '2018-07-06 18:00:00', '2018-08-07 18:00:00', 5, '2018-07-10 04:35:27', '2018-07-10 04:35:27');
 
 -- --------------------------------------------------------
 
@@ -478,6 +482,14 @@ CREATE TABLE `role_user` (
   `role_id` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Dumping data for table `role_user`
+--
+
+INSERT INTO `role_user` (`user_id`, `role_id`) VALUES
+(1, 4),
+(5, 3);
+
 -- --------------------------------------------------------
 
 --
@@ -504,7 +516,7 @@ CREATE TABLE `shop_info` (
 
 INSERT INTO `shop_info` (`id`, `shop_name`, `shop_code`, `shop_manager_name`, `shop_contact`, `address`, `status`, `created_by`, `updated_by`, `created_at`, `updated_at`) VALUES
 (2, 'Pizza Hut', 'PH', 'Mofazzol', '01874535456', 'wwww', 1, 1, 0, '2017-04-25 04:30:30', '2018-07-09 04:46:33'),
-(3, 'Sushi Samurai', 'SS', 'ww', '222222', 'Banani', 1, 1, 0, '2017-04-25 04:41:26', '2018-07-09 04:36:45'),
+(3, 'Sushi Samurai', 'SS', 'Laitul', '222222', 'Banani', 1, 1, 0, '2017-04-25 04:41:26', '2018-07-10 11:27:42'),
 (6, 'Tokyo Diner', 'TD', 'Salehn', '01723312024', 'Dhanmondhi', 1, 1, 0, '2017-04-25 04:43:55', '2018-07-04 08:14:00'),
 (7, 'ww', 'ww', 'ww', 'www', 'wwww', 0, 0, 0, '2017-04-25 04:45:20', '2017-04-25 04:45:20'),
 (9, 'ww', 'ww', 'ww', 'www', 'wwww', 0, 0, 0, '2017-04-25 04:49:00', '2017-04-25 04:49:00'),
@@ -520,14 +532,16 @@ INSERT INTO `shop_info` (`id`, `shop_name`, `shop_code`, `shop_manager_name`, `s
 (19, 'ww', 'ww', 'ww', 'www', 'wwww', 0, 0, 0, '2017-04-25 06:08:33', '2017-04-25 06:08:33'),
 (20, 'ww', 'ww', 'ww', 'www', 'wwww', 0, 0, 0, '2017-04-25 06:09:16', '2017-04-25 06:09:16'),
 (21, 'ww', 'ww', 'ww', 'www', 'wwww', 0, 0, 0, '2017-04-25 06:10:04', '2017-04-25 06:10:04'),
-(22, 'ww', 'ww', 'ww', 'www', 'wwww', 0, 0, 0, '2017-04-25 06:12:06', '2017-04-25 06:12:06'),
+(22, 'Cream and Fudge', 'CF', 'Moinul', '8801752331345', 'Banani', 1, 10, 10, '2017-04-25 06:12:06', '2018-07-10 10:23:40'),
 (23, 'ww', 'ww', 'ww', 'www', 'wwww', 0, 0, 0, '2017-04-25 06:13:20', '2017-04-25 06:13:20'),
 (24, 'ww', 'ww', 'ww', 'www', 'wwww', 0, 0, 0, '2017-04-25 06:14:18', '2017-04-25 06:14:18'),
 (25, '2', '2', '2', '2', '2', 0, 0, 0, '2017-04-26 01:58:20', '2017-04-26 01:58:20'),
 (26, 'www', 'ww', 'ww', 'ww', 'ww', 0, 0, 0, '2017-04-26 02:30:12', '2017-04-26 02:30:12'),
-(27, '22', '22', '22', '22', '22', 0, 0, 0, '2017-04-26 02:31:30', '2017-04-26 02:31:30'),
+(27, 'Barcode', 'BC', 'Abdul', '01743405321', 'Gulshan', 1, 10, 10, '2017-04-26 02:31:30', '2018-07-10 10:24:36'),
 (28, 'KFC Dhanmodi ', '01', 'Shanto', '01756433611', '93 B New Eskat', 0, 0, 0, '2017-04-29 22:51:22', '2017-04-29 22:51:22'),
-(29, 'Tokeyo Express', 'TE', 'Lily', '8801811419556', 'Gulshan', 1, 1, 2, '2018-07-09 04:51:31', '2018-07-09 04:51:31');
+(29, 'Tokeyo Express', 'TE', 'Lily', '8801811419556', 'Gulshan', 1, 1, 2, '2018-07-09 04:51:31', '2018-07-09 04:51:31'),
+(30, 'Yum Cha District', 'YC', 'Lara Jade', '8801752393456', 'Banani 11', 1, 5, 5, '2018-07-09 11:00:38', '2018-07-09 11:00:38'),
+(31, 'Kiyoshi', 'KI', 'Nagasaki', '8801732345432', 'Gulshan 1', 1, 5, 5, '2018-07-10 11:30:37', '2018-07-10 11:30:37');
 
 -- --------------------------------------------------------
 
@@ -611,7 +625,21 @@ INSERT INTO `shop_redeemed` (`id`, `point_rule_id`, `shop_id`, `customerinfo_id`
 (63, 1, 27, 11, 6976.00000000, 384.00000000, 5, '2018-07-09 09:03:32', '2018-07-09 09:03:32'),
 (64, 1, 27, 11, 0.00000000, 384.00000000, 5, '2018-07-09 09:04:24', '2018-07-09 09:04:24'),
 (66, 1, 27, 32, 3500.00000000, 192.00000000, 5, '2018-07-09 09:28:58', '2018-07-09 09:28:58'),
-(67, 1, 27, 32, 0.00000000, 192.00000000, 5, '2018-07-09 09:29:21', '2018-07-09 09:29:21');
+(67, 1, 27, 32, 0.00000000, 192.00000000, 5, '2018-07-09 09:29:21', '2018-07-09 09:29:21'),
+(68, 7, 27, 30, 0.00000000, 180.00000000, 5, '2018-07-10 06:42:55', '2018-07-10 06:42:55'),
+(69, 1, 27, 40, 9000.00000000, 480.00000000, 5, '2018-07-10 12:03:43', '2018-07-10 12:03:43'),
+(70, 7, 27, 40, 0.00000000, 200.00000000, 5, '2018-07-10 12:04:08', '2018-07-10 12:04:08'),
+(71, 6, 22, 40, 0.00000000, 260.00000000, 5, '2018-07-11 03:46:52', '2018-07-11 03:46:52'),
+(72, 6, 22, 30, 0.00000000, 260.00000000, 5, '2018-07-11 05:16:07', '2018-07-11 05:16:07'),
+(73, 6, 22, 41, 0.00000000, 0.00000000, 5, '2018-07-11 05:26:38', '2018-07-11 05:26:38'),
+(74, 1, 22, 30, 0.00000000, 224.00000000, 5, '2018-07-11 05:30:55', '2018-07-11 05:30:55'),
+(75, 1, 22, 30, 0.00000000, 0.00000000, 5, '2018-07-11 05:56:29', '2018-07-11 05:56:29'),
+(76, 1, 22, 30, 2556.00000000, 1312.00000000, 5, '2018-07-11 06:12:56', '2018-07-11 06:12:56'),
+(77, 6, 29, 30, 0.00000000, 40.00000000, 5, '2018-07-11 06:19:25', '2018-07-11 06:19:25'),
+(78, 6, 29, 30, 0.00000000, 80.00000000, 5, '2018-07-11 06:49:26', '2018-07-11 06:49:26'),
+(79, 6, 30, 30, 0.00000000, 80.00000000, 5, '2018-07-11 06:49:43', '2018-07-11 06:49:43'),
+(80, 7, 31, 41, 7000.00000000, 200.00000000, 5, '2018-07-11 11:27:38', '2018-07-11 11:27:38'),
+(81, 7, 31, 41, 7000.00000000, 200.00000000, 5, '2018-07-11 11:28:29', '2018-07-11 11:28:29');
 
 -- --------------------------------------------------------
 
@@ -638,7 +666,10 @@ INSERT INTO `shop_user` (`shop_id`, `user_id`) VALUES
 (29, 5),
 (27, 5),
 (28, 5),
-(2, 5);
+(2, 5),
+(30, 5),
+(22, 5),
+(31, 5);
 
 -- --------------------------------------------------------
 
@@ -669,7 +700,17 @@ INSERT INTO `smslog` (`id`, `hotkey`, `subhotkey`, `msisdn`, `sms_body`, `status
 (21, 'RST', 'PH', '01683836999', 'RST PH Rick Ban 0509 Student Mirpur', '0', 'This number is already registered', '2018-07-03 08:44:22', '2018-07-03 08:44:22'),
 (23, 'RST', 'PH', '01683836999', 'RST PH Rick Ban 0509 Student Mirpur', '0', 'This number is already registered', '2018-07-03 08:47:03', '2018-07-03 08:47:03'),
 (24, 'RST', 'UM', '01683836999', 'RST UM Sam Yao 0507 Student Banani', '0', 'This number is already registered', '2018-07-03 08:47:38', '2018-07-03 08:47:38'),
-(26, 'RST', 'PH', '01683836929', 'RST PH Sam Yao 0507 Student Banani', '1', 'Thank you for registering, you got 100 points!', '2018-07-03 08:51:50', '2018-07-03 08:51:50');
+(26, 'RST', 'PH', '01683836929', 'RST PH Sam Yao 0507 Student Banani', '1', 'Thank you for registering, you got 100 points!', '2018-07-03 08:51:50', '2018-07-03 08:51:50'),
+(27, 'RST', 'PH', '01742939134', 'RST PH TAR ROW 0507 Student Gulshan', '1', 'Thank you for registering, you got 100 points!', '2018-07-10 09:04:35', '2018-07-10 09:04:35'),
+(28, 'RST', 'PH', '01742939134', 'RST PH TAR ROW 0507 Student Gulshan', '0', 'This number is already registered', '2018-07-10 09:05:04', '2018-07-10 09:05:04'),
+(39, 'RST', 'PH', '01742939134', 'RST PH TAR ROW 0507 Student Gulshan', '1', 'Thank you for registering, you got 100 points!', '2018-07-10 09:17:11', '2018-07-10 09:17:11'),
+(40, 'RST', 'PH', '01742939134', 'RST PH TAR ROW 0507 Student Gulshan', '1', 'Thank you for registering, you got 100 points!', '2018-07-10 09:17:11', '2018-07-10 09:17:11'),
+(41, 'RST', 'PH', '01742939134', 'RST PH TAR ROW 0507 Student Gulshan', '1', 'Thank you for registering, you got 100 points!', '2018-07-10 09:18:42', '2018-07-10 09:18:42'),
+(42, 'RST', 'PH', '01742939134', 'RST PH TAR ROW 0507 Student Gulshan', '0', 'This number is already registered', '2018-07-10 09:18:43', '2018-07-10 09:18:43'),
+(43, 'RST', 'PH', '01742939134', 'RST PH TAR ROW 0507 Student Gulshan', '1', 'Thank you for registering, you got 100 points!', '2018-07-10 09:19:16', '2018-07-10 09:19:16'),
+(44, 'RST', 'PH', '01742939134', 'RST PH TAR ROW 0507 Student Gulshan', '0', 'This number is already registered', '2018-07-10 09:19:17', '2018-07-10 09:19:17'),
+(45, 'RST', 'PH', '01742939134', 'RST PH TAR ROW 0507 Student Gulshan', '0', 'This number is already registered', '2018-07-10 09:39:14', '2018-07-10 09:39:14'),
+(46, 'RST', 'PH', '01742939134', 'RST PH TAR ROW 0507 Student Gulshan', '0', 'This number is already registered', '2018-07-10 10:21:50', '2018-07-10 10:21:50');
 
 -- --------------------------------------------------------
 
@@ -698,7 +739,7 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `api_token`, `status`, `created_by`, `updated_by`, `remember_token`, `created_at`, `updated_at`) VALUES
 (1, 'Admin', 'admin@example.com', '123456', 'eioruwe#@Jidaj', 1, 0, 3, NULL, NULL, NULL),
 (3, 'Suman', 'admin@gmail.com', '$2y$10$zA5CfuODjUGXJs3sd2zdNO6iqlYNOqDx1e.9rG5iMbFFU794YO7/6', '7d4a38c1e2fa6a1f3b8d59656d64f26a6e07d030b51eab3f94565b01c347', 1, NULL, NULL, 'N8nc0M3cv4ZVH8arGGfy6rchI12i71lPhXag9rqi7SvQ7YcZCXteyFuN1FOo', NULL, '2017-06-04 06:52:14'),
-(5, 'Admin', 'admin1@email.com', '$2y$10$8eD96oFcuFc.nHLmCm3sheDNpvcGp27e.xX/yOelNajoW2.7dgdXO', 'QwsrEgasjh124F', 1, NULL, NULL, 'kuTGMHVFgKpK6ClcBDIOlwuB3uQAuR20Ypee6owDqLZ8IqNlm01ruQKrN5K9', '2018-06-27 02:01:20', '2018-06-27 02:01:20');
+(5, 'Admin', 'admin1@email.com', '$2y$10$8eD96oFcuFc.nHLmCm3sheDNpvcGp27e.xX/yOelNajoW2.7dgdXO', 'QwsrEgasjh124F', 1, NULL, NULL, 'oSI2bbrxfFdiEbd3CVIWtLnUl5ZV9kZhubm0jwwJbaqEK5ueSHc4a7MQKV0o', '2018-06-27 02:01:20', '2018-06-27 02:01:20');
 
 --
 -- Indexes for dumped tables
@@ -792,7 +833,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `customerinfo`
 --
 ALTER TABLE `customerinfo`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT for table `merchant_info`
@@ -810,7 +851,7 @@ ALTER TABLE `permissions`
 -- AUTO_INCREMENT for table `point_rule`
 --
 ALTER TABLE `point_rule`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `roles`
@@ -822,19 +863,19 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `shop_info`
 --
 ALTER TABLE `shop_info`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `shop_redeemed`
 --
 ALTER TABLE `shop_redeemed`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
 
 --
 -- AUTO_INCREMENT for table `smslog`
 --
 ALTER TABLE `smslog`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
 -- AUTO_INCREMENT for table `users`

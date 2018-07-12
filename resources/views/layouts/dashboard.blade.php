@@ -53,94 +53,149 @@
 				<div class="navbar-default sidebar" role="navigation">
 					<div class="sidebar-nav navbar-collapse">
 						<ul class="nav" id="side-menu">
+							@role('Merchantsadministrator')
 							<li {{ (Request::is('/home') ? 'class="active"' : '') }}>
-								<a href="{{ url ('/home') }}"><i class="fas fa-home"></i></i> Home</a>
+								<a href="{{ url ('merchantsadministrator/home') }}"><i class="fas fa-home"></i></i> Home</a>
 							</li>
-					 
+					 		@endrole
+					 		@role('shopmanager')
+							<li {{ (Request::is('/home') ? 'class="active"' : '') }}>
+								<a href="{{ url ('shopmanager/home') }}"><i class="fas fa-home"></i></i> Home</a>
 							</li>
+					 		@endrole
+							</li>
+							@role('Merchantsadministrator')
 							<!-- restaurant -->
 							 <li>
 								<a href="#"><i class="fas fa-utensils"></i> Restaurant Management<span class="fa arrow"></span></a>
 								<ul class="nav nav-second-level">
 									<li>
-										<a href="{{ url('/shop') }}">Manage Restaurants</a>
+										<a href="{{ url('merchantsadministrator/shop') }}">Manage Restaurants</a>
 									</li>
 									<li>
-										<a href="{{ url('/shop/register') }}">Create New Restaurant</a>
+										<a href="{{ url('merchantsadministrator/shop/register') }}">Create New Restaurant</a>
 									</li>
 								</ul>
 							</li>
+							@endrole
 							<!-- Customer Management -->
-
+							@role('Merchantsadministrator')
 							<li>
 								<a href="#"><i class="fas fa-user-circle"></i> Customer Managment<span class="fa arrow"></span></a>
 								<ul class="nav nav-second-level">
 									<li>
-										<a href="{{ url ('/customer/index') }}">Manage Customers</a>
+										<a href="{{ url ('merchantsadministrator/customer/index') }}">Manage Customers</a>
 									</li>
 									<li>
-										<a href="{{ url('/customer/register') }}">Create New Customer</a>
+										<a href="{{ url('merchantsadministrator/customer/register') }}">Create New Customer</a>
 									</li>
 								</ul>
 								<!-- /.nav-second-level -->
 							</li>
-
-								<!-- Shop Point Management -->
-
+							@endrole
+							@role('shopmanager')	
+								<li>
+								<a href="#"><i class="fas fa-user-circle"></i> Customer Managment<span class="fa arrow"></span></a>
+								<ul class="nav nav-second-level">
+									<li>
+										<a href="{{ url ('shopmanager/customer/index') }}">Manage Customers</a>
+									</li>
+									<li>
+										<a href="{{ url('shopmanager/customer/register') }}">Create New Customer</a>
+									</li>
+								</ul>
+								<!-- /.nav-second-level -->
+							</li>
+							@endrole
+							<!-- Shop Point Management -->
+							
+							@role('Merchantsadministrator')
 							<li>
 								<a href="#"><i class="fas fa-utensils"></i>  Shop Point Management<span class="fa arrow"></span></a>
 								<ul class="nav nav-second-level">
 									<li>
-										<a href="{{ url('/offerlist/list')}}">Point Offers</a>		
+										<a href="{{ url('merchantsadministrator/offerlist/list')}}">Point Offers</a>		
 									</li>
 									<li>
-										<a href="{{ url ('/offerlist/register') }}">Create Offer</a>
+										<a href="{{ url ('merchantsadministrator/offerlist/register') }}">Create Offer</a>
 									</li>
 									<li>
-										<a href="{{ url('/offerlist')}}">Process Point Orders</a>		
-									</li>
-			
-									
+										<a href="{{ url('merchantsadministrator/offerlist')}}">Process Point Orders</a>		
+									</li>	
 								</ul>
 								<!-- /.nav-second-level -->
 							</li>
-							
+							@endrole
+
+							@role('shopmanager')
 							<li>
-								<a href="#"><i class="fas fa-portrait"></i>  Orders<span class="fa arrow"></span></a>
+								<a href="#"><i class="fas fa-utensils"></i>  Shop Point Management<span class="fa arrow"></span></a>
 								<ul class="nav nav-second-level">
 									<li>
-										<a href="{{ url('/orders/total_order')}}">Order List</a>		
+										<a href="{{ url('shopmanager/offerlist/list')}}">Point Offers</a>		
 									</li>
 									<li>
-										<a href="{{ url('/orders/new_list')}}">New Orders</a>		
+										<a href="{{ url ('shopmanager/offerlist/register') }}">Create Offer</a>
+									</li>
+									<li>
+										<a href="{{ url('shopmanager/offerlist')}}">Process Point Orders</a>		
+									</li>	
+								</ul>
+								<!-- /.nav-second-level -->
+							</li>
+							@endrole
+							@role('Merchantsadministrator')
+							<li>
+								<a href="#"><i class="fas fa-portrait"></i> Orders<span class="fa arrow"></span></a>
+								<ul class="nav nav-second-level">
+									<li>
+										<a href="{{ url('merchantsadministrator/orders/total_order')}}">Order List</a>		
+									</li>
+									<li>
+										<a href="{{ url('merchantsadministrator/orders/new_list')}}">New Orders</a>		
 									</li>
 									
 								</ul>
 								<!-- /.nav-second-level -->
 							</li>
-
+							@endrole
+							@role('shopmanager')
+							<li>
+								<a href="#"><i class="fas fa-portrait"></i> Orders<span class="fa arrow"></span></a>
+								<ul class="nav nav-second-level">
+									<li>
+										<a href="{{ url('shopmanager/orders/total_order')}}">Order List</a>		
+									</li>
+									<li>
+										<a href="{{ url('shopmanager/orders/new_list')}}">New Orders</a>		
+									</li>
+									
+								</ul>
+								<!-- /.nav-second-level -->
+							</li>
+							@endrole
 						   	<!-- Report Management -->
+						   	@role('Merchantsadministrator')
 							<li>
 								<a href="#"><i class="fa fa-files-o fa-fw"></i> Report Management<span class="fa arrow"></span></a>
 								<ul class="nav nav-second-level">
 									<li>
-										<a href="{{ url ('report/') }}">List of Reports</a>
+										<a href="{{ url ('merchantsadministrator/report/') }}">List of Reports</a>
 									</li>
 									<li>
-										<a href="{{ url ('report/customer') }}">List of Customer Reports</a>
+										<a href="{{ url ('merchantsadministrator/report/customer') }}">List of Customer Reports</a>
 									</li>
 									<li>
-										<a href="{{ url ('report/sms') }}">List of SMS Log Reports</a>
+										<a href="{{ url ('merchantsadministrator/report/sms') }}">List of SMS Log Reports</a>
 									</li>
-						<!-- 			<li>
-										 @else
-										<a href="{{ route('login') }}">Login Page</a>
+
 										@endauth
 									</li>
-									@endif -->
+									@endif
 								</ul>
 								<!-- /.nav-second-level -->
 							</li>
+							@endrole
 						</ul>
 					</div>
 					<!-- /.sidebar-collapse -->
